@@ -96,6 +96,7 @@ a img {
 
 .inner {
   max-width: 1024px;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -114,9 +115,7 @@ a img {
   -webkit-font-smoothing: antialiased;
 }
 
-#myself-text{
 
-}
 
 #code {
   border-radius: 5px;
@@ -433,6 +432,16 @@ ul.toc {
   .portfolio-thumb {
     width: 90%;
   }
+  
+  .inner {
+
+  height: auto;
+  margin: 0 auto;
+  }
+  
+  #myself-text{
+  clear: both;
+  }
 }
 
 
@@ -452,6 +461,15 @@ ul.toc {
 
   #resume .right {
     display: none;
+  }
+  .inner {
+
+  height: auto;
+  margin: 0 auto;
+  }
+  
+  #myself-text{
+  clear: both;
   }
 
 }
@@ -500,6 +518,15 @@ ul.toc {
 
   li.mobile-header a {
     color: #b1b1b1;
+  }
+  .inner {
+
+  height: auto;
+  margin: 0 auto;
+  }
+  
+  #myself-text{
+  clear: both;
   }
 }
 
@@ -559,6 +586,15 @@ ul.toc {
 
   .tagline {
     padding-bottom : 20px; 
+  }
+  .inner {
+
+  height: auto;
+  margin: 0 auto;
+  }
+  
+  #myself-text{
+  clear: both;
   }
 }
 
@@ -624,6 +660,15 @@ ul.toc {
 
   #code {
     margin-bottom: 20px;
+  }
+  .inner {
+
+  height: auto;
+  margin: 0 auto;
+  }
+  
+  #myself-text{
+  clear: both;
   }
 }
 
