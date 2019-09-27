@@ -438,7 +438,9 @@ ul.toc {
   height: auto;
   margin: 0 auto;
   }
-  
+  #myself{
+    font-size: 10px;  
+  }
   #myself-text{
   clear: both;
   }
