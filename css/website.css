@@ -38,11 +38,7 @@ body {
   margin-top: 10px;
 }
 
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+
 
 a {
   text-decoration: none;
@@ -108,14 +104,13 @@ a img {
 
 #myself{
   background-color: #C7C7C7;
-  height: 600px;
+  height: auto;
   margin-top: -30px;
   font-size: 24px;
   line-height: 40px;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
-
-
 
 #code {
   border-radius: 5px;
@@ -271,6 +266,10 @@ img.icon:hover {
   padding: 60px 0 60px 0;
   font-size: 26px;
   line-height: 40px;
+}
+
+#work a {
+  color: #B31B1B
 }
 
 #footer{
@@ -434,15 +433,21 @@ ul.toc {
   }
   
   .inner {
-
-  height: auto;
-  margin: 0 auto;
+    height: auto;
+    margin: 0 auto;
   }
   #myself{
     font-size: 10px;  
+    text-align: center;
   }
-  #myself-text{
-  clear: both;
+  
+  .box1{
+    align: center;
+    
+  }
+  .box2{
+    float: none;
+    clear: both;
   }
 }
 
@@ -459,6 +464,7 @@ ul.toc {
 
   #resume .inner {
     width: 85%;
+    height: auto;
   }
 
   #resume .right {
@@ -469,11 +475,6 @@ ul.toc {
   height: auto;
   margin: 0 auto;
   }
-  
-  #myself-text{
-  clear: both;
-  }
-
 }
 
 @media (max-width: 480px) {
@@ -527,9 +528,6 @@ ul.toc {
   margin: 0 auto;
   }
   
-  #myself-text{
-  clear: both;
-  }
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 568px) { 
@@ -595,9 +593,6 @@ ul.toc {
   margin: 0 auto;
   }
   
-  #myself-text{
-  clear: both;
-  }
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -668,9 +663,6 @@ ul.toc {
   height: auto;
   margin: 0 auto;
   }
-  
-  #myself-text{
-  clear: both;
-  }
+
 }
 
