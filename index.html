@@ -25,61 +25,81 @@
   <!-- Custom styles for this template -->
   <link href="css/website.css" rel="stylesheet">
 
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-41348693-1', 'kalynnakano.com');
+    ga('send', 'pageview');
+  </script> 
+        
 </head>
 
 <body>
-
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
-	<div class="container">
-	  <a class="navbar-brand" href="#illustration">Jung Hyun Sohn</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	  </button>
-	  
-	</div>
-  </nav>
-
-  <div id="illustration">
-	<center>
-	  <img src="img/calgary-skyline.jpeg" class = "img-fluid" alt = "Responsive Image">
-	</center>
-  </div>
-
-  <div id="about">
-	<div class = "inner">
-	  <p>Hello, World! You can call me Daniel.</p>
-	  <br><br>
-	  <!-- Console -->
-	  <div id="code">
-		<div id="console">
-		  &gt; Daniel.origin<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; "Seoul, Korea"<br/><br/></span>
-		  &gt; Daniel.education<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; "University of Calgary"<br/><br/></span>
-		  &gt; Daniel.major<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; "Computer Science"<br/><br/></span>
-		  &gt; Daniel.expectedGraduation<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; "Apr 2021"<br/><br/></span>
-		  &gt; Daniel.interests<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; ["Code", "Lifting Weights", "Hiking", "Cooking", "Board Games", "Movies"]<br/><br/></span>
-		  &gt; Daniel.workExperience.latest<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; Latest Work Experience<br/>
-							   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; company: "ME Onsite Inc."<br/>
-							   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; role: "Software Developer Intern"<br/>
-							   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; startDate: "November 2018"<br/>
-							   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; endDate: "Current"<br/>
-		  <br/></span>
-		  &gt; Daniel.resume<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; "<a target="_blank" href="resume/Resume.pdf">junghyunsohn.pdf</a>"<br/><br/></span>
-		  &gt; Daniel.work<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; "<a target="_blank" href="https://github.com/danSohn">Github Repo</a>"<br/><br/></span>
-		  &gt; Daniel.email<br/>
-		  <span class="answer">&nbsp;&nbsp;=&gt; "<a target="_blank" href="mailto:junghyun.sohn@ucalgary.ca">junghyun.sohn@ucalgary.ca</a>"<br/><br/></span>
-		</div>
-	  </div>
+    <div id="toc-holder" class="toc-holder">
+        <a href="#" class="toc-link" id="toc-link"><span>&#9776;</span></a>
+        <ul id="toc" class="toc">
+            <li class="toc-h1"><a href="#about">About</a></li>
+            <li class="toc-h1"><a href="#resume">Résumé</a></li>
+            <li class="toc-h1"><a href="#work">Work</a></li>
+        </ul>
     </div>
-  </div>
+        
+    <!-- Header -->
+    <div id="header">
+        <div class="inner name"><a href="#illustration">Jung Hyun Sohn</a></div>
+            <div class ="nav">
+            <ul class="mobile-nav">
+            <li class="mobile-header"><a href="#about">About</a></li>
+            <li class="mobile-header"><a href="#resume">Resumé</a></li>
+            <li class="mobile-header"><a href="#work">Work</a></li></ul>
+        </div>
+    </div>
+
+    <div id="illustration">
+        <center>
+            <img src="img/calgary-skyline.jpeg" class = "img-fluid" alt = "Responsive Image">
+        </center>
+    </div>
+
+    <div id="about">
+        <div class = "inner">
+            <p>Hello, World! You can call me Daniel.</p>
+            <br><br>
+            <!-- Console -->
+            <div id="code">
+                <div id="console">
+                        &gt; Daniel.origin<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; "Seoul, Korea"<br/><br/></span>
+                        &gt; Daniel.education<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; "University of Calgary"<br/><br/></span>
+                        &gt; Daniel.major<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; "Computer Science"<br/><br/></span>
+                        &gt; Daniel.expectedGraduation<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; "Apr 2021"<br/><br/></span>
+                        &gt; Daniel.interests<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; ["Code", "Lifting Weights", "Hiking", "Cooking", "Board Games", "Movies"]<br/><br/></span>
+                        &gt; Daniel.workExperience.latest<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; Latest Work Experience<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; company: "ME Onsite Inc."<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; role: "Software Developer Intern"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; startDate: "November 2018"<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; endDate: "Current"<br/>
+                    <br/></span>
+                        &gt; Daniel.resume<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; "<a target="_blank" href="resume/Resume.pdf">junghyunsohn.pdf</a>"<br/><br/></span>
+                        &gt; Daniel.work<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; "<a target="_blank" href="https://github.com/danSohn">Projects</a>"<br/><br/></span>
+                        &gt; Daniel.email<br/>
+                    <span class="answer">&nbsp;&nbsp;=&gt; "<a target="_blank" href="mailto:junghyun.sohn@ucalgary.ca">junghyun.sohn@ucalgary.ca</a>"<br/><br/></span>
+                </div>
+            </div>
+        </div>
+    </div>
 	  
   <!-- More about me!!!! -->
   
@@ -94,7 +114,7 @@
       <div id = "myself-text">
         <p>I'm currently a student at the
         <a href="https://www.ucalgary.ca/" target="_blank" style="color: #B31B1B; text-decoration: none" class="link">University of Calgary</a>
-        studying Computer Science. Entering my fourth year, I am seeking internship opportunities for 2019.
+        studying Computer Science. Entering my fourth year, I am seeking internship opportunities for 2020.
         I was born in South Korea but raised in Canada, where I developed a strong interest in the way people interact with computers and how our lives may be simplified through technology. I love to lift weights, cook Korean cuisine and hike in the mountains. If you'd like to chat (over some bubble tea) or challenge me to a friendly game of Mario Kart, let me know!</p>
       </div>
       </div>
@@ -222,22 +242,86 @@
 -->
 
 
-  <!-- Footer -->
-  <div id ="footer">
+    <!-- Footer -->
+    <div id ="footer">
     <div class="inner">
-      © 2019 Jung Hyun Sohn. 
-      <span class="right">
-        <a target="_blank" href="https://www.linkedin.com/in/jung-hyun-sohn-b31392148/">LinkedIn</a>&nbsp;//&nbsp;
-        <a target="_blank" href="mailto:junghyun.sohn@ucalgary.ca">Email</a>&nbsp;//&nbsp;
-        <a target="_blank" href="https://www.facebook.com/daniel.sohn.37">Facebook</a>
-      </span>
+        © 2019 Jung Hyun Sohn. 
+        <span class="right">
+            <a target="_blank" href="https://www.linkedin.com/in/jung-hyun-sohn-b31392148/">LinkedIn</a>&nbsp;//&nbsp;
+            <a target="_blank" href="mailto:junghyun.sohn@ucalgary.ca">Email</a>&nbsp;//&nbsp;
+            <a target="_blank" href="https://www.facebook.com/daniel.sohn.37">Facebook</a>
+        </span>
     </div>
-  </div>
+    </div>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- Additional scripts from template http://kalynnakano.com/#illustration-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="js/jquery.fixedTOC.js?v=3.0"></script>
+    <script src="dist/jquery.magnific-popup.js?v=0.9.8"></script>
+    <script type="text/javascript">
+     $(document).ready(function() {
+            $('.image-popup-no-margins').magnificPopup({
+              type: 'image',
+              closeOnContentClick: true,
+              closeBtnInside: false,
+              fixedContentPos: true,
+              mainClass: 'mfp-no-margins mfp-with-zoom', // Class to remove default margin from left and right side
+              image: {
+                verticalFit: true
+              },
+              zoom: {
+                enabled: true,
+                duration: 300 // Duration variable also in CSS
+              }
+            });
 
+             $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+              disableOn: 700,
+              type: 'iframe',
+              mainClass: 'mfp-fade',
+              removalDelay: 160,
+              preloader: false,
+
+              fixedContentPos: false
+            });
+
+            $('.simple-ajax-popup-align-top').magnificPopup({
+              type: 'ajax',
+              alignTop: true,
+              overflowY: 'scroll' // as we know that popup content is tall we set scroll overflow by default to avoid jump
+            });
+
+            $('.simple-ajax-popup').magnificPopup({
+              type: 'ajax'
+            });
+          });
+    </script>
+    <script>
+    // call the plugin on the "#toc" element
+    $('#toc').fixedTOC({
+        menuOpens: 'click', // or 'mouseenter'
+        scrollSpeed: 1000,
+        menuSpeed: 300,
+        useSubMenus: false,
+        resetSubMenus: false,
+        topLinkWorks: true
+    });
+    </script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1965499-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
 </body>
 
 </html>
