@@ -258,6 +258,11 @@ img.icon:hover {
   filter: none;
 }
 
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
 #work{
   background: #eee;
   height: auto;
