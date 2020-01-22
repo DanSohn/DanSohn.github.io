@@ -23,14 +23,13 @@ body {
 .box1 {
   float: left;
   width: 30%;
-  padding: 50px;
+  padding: 30px;
 }
 
 .box2 {
   float: right;
   width: 60%;
-  padding: 50px;
-  margin-top: 10px;
+  padding: 30px;
 }
 
 .clearfix::after {
@@ -103,7 +102,7 @@ a img {
 
 #myself{
   background-color: #C7C7C7;
-  height: 600px;
+  height: 570px;
   margin-top: -30px;
   font-size: 24px;
   line-height: 40px;
@@ -298,15 +297,16 @@ img.icon:hover {
   line-height: 24px;
 }
 
-.portfolio-thumb a {
-  text-decoration: underline;
-}
+
 
 .portfolio-big {
   width: 95%;
   /* height: 680px;*/
 }
 
+.project-link {
+  text-decoration: none;
+}
 
 #footer{
   background: #fafafa;
