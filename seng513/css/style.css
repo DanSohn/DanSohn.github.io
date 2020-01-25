@@ -1,0 +1,36 @@
+/* The navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set to fixed position */
+    top: 0; /* Position at the top of the page */
+    min-width: 100%; /* Full width */
+    left: 0; /* I ensure that it will start from left side of browser, no spacing */
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    /* Fade effect from ianlunn.github.io/Hover */
+
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    overflow: hidden;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: color, background-color;
+    transition-property: color, background-color;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover, a:focus, a:active {
+    background-color: #2098D1;
+    color: white;
+}
