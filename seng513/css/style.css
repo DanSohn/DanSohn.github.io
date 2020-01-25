@@ -36,15 +36,14 @@ body {
 
 }
 
-/* Change background on mouse-over
+/* Change background on mouse-over */
 .navbar a:hover, a:focus, a:active {
-    background-color: #2098D1;
-    color: white;
+    color: #61CDE8;
 }
-*/
+
 
 .home {
-    font-size: xxx-large;
+    font-size: 50pxw     ;
     padding: 0px;
 }
 
@@ -52,4 +51,14 @@ body {
 .img-fluid {
     max-width: 100%;
     height: auto;
+}
+
+.img-text {
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #ffffff;
+    font-size: 70px;
 }
