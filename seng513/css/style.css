@@ -1,36 +1,55 @@
+body {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Karla', sans-serif;
+    line-height: 20px;
+    color: #333333;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+}
+
+
 /* The navigation bar */
 .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: rgba(255,255,255,0);
     position: fixed; /* Set to fixed position */
     top: 0; /* Position at the top of the page */
     min-width: 100%; /* Full width */
-    left: 0; /* I ensure that it will start from left side of browser, no spacing */
+    height: 80px;
 }
 
 /* Links inside the navbar */
 .navbar a {
+    font-family: 'Open Sans', sans-serif;
     float: left;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+
+    /* Padding: vertical horizontal */
+    padding: 30px 15px;
     text-decoration: none;
     /* Fade effect from ianlunn.github.io/Hover */
 
     vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    overflow: hidden;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: color, background-color;
-    transition-property: color, background-color;
+
 }
 
-/* Change background on mouse-over */
+/* Change background on mouse-over
 .navbar a:hover, a:focus, a:active {
     background-color: #2098D1;
     color: white;
+}
+*/
+
+.home {
+    font-size: xxx-large;
+    padding: 0px;
+}
+
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
 }
