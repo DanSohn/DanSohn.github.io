@@ -308,6 +308,10 @@ img.icon:hover {
   text-decoration: none;
 }
 
+.project-link:hover, .project-link:focus, .project-link:active {
+  color: #3a92c8;
+}
+
 #footer{
   background: #fafafa;
   min-height: 50px;
