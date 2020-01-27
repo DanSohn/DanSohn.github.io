@@ -62,3 +62,30 @@ body {
     color: #ffffff;
     font-size: 70px;
 }
+
+.inner {
+    max-width: 1024px;
+    height: auto;
+    margin: 0 auto;
+}
+
+
+.tagline {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    padding-bottom: 50px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+#recipe {
+    background-color: #FFFEFC;
+    height: 570px;
+    margin-top: -30px;
+    padding-top:  60px;
+    font-size: 24px;
+    line-height: 40px;
+    -webkit-font-smoothing: antialiased;
+}
