@@ -37,7 +37,7 @@ body {
 }
 
 /* Change background on mouse-over */
-.navbar a:hover, a:focus, a:active {
+.navbar a:hover, a:focus {
     color: #61CDE8;
 }
 
