@@ -13,6 +13,19 @@ img {
     vertical-align: middle;
     display: block;
 }
+
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:link, a:visited, a:hover, a:active{
+    text-decoration:none;
+    color: #333;
+}
+
+
 /* The navigation bar */
 .navbar {
     overflow: hidden;
@@ -92,6 +105,7 @@ img {
 }
 
 #featured-recipe {
+    position: relative;
     background-color: #f8f8f8;
     display: table;
     margin-top: -30px;
@@ -108,6 +122,7 @@ img {
 
 .featured-info {
     font-family: 'Martel', serif;
+    position: relative;
     font-weight: normal;
     display: table-cell;
     width: 35%;
@@ -116,11 +131,54 @@ img {
 }
 
 .featured-inner {
-    padding: 14% 2.5em 2.8em;
+    padding: 14% 7em 2.8em;
+    text-align: center;
 }
 
 
 .featured-title {
     font-weight: normal;
-    text-align: center;
+}
+
+.featured-text {
+    font-size: medium;
+}
+
+
+.featured-link {
+    font-size: small;
+    color: black;
+    text-decoration: underline;
+}
+
+.featured-link:hover {
+    text-decoration: none;
+}
+
+.vl {
+    border-left: 1px solid black;
+    position: absolute;
+    height: 400px;
+    left: 50%;
+    margin-left: -3px;
+    top: 45%;
+}
+
+
+
+
+
+.right {
+    float: right;
+}
+
+
+#footer{
+    background: #fafafa;
+    text-align: left;
+    color: #b1b1b1;
+    padding-top: 20px;
+    padding-bottom: 32px;
+    font-size: 12px;
+    line-height: 20px;
 }
