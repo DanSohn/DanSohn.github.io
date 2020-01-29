@@ -20,9 +20,9 @@ a {
     color: #333;
 }
 
-a:link, a:visited, a:hover, a:active{
+a:hover, a:active{
     text-decoration:none;
-    color: #333;
+    color: #61CDE8;
 }
 
 
@@ -157,13 +157,20 @@ a:link, a:visited, a:hover, a:active{
 .vl {
     border-left: 1px solid black;
     position: absolute;
-    height: 400px;
+    height: 290px;
     left: 50%;
     margin-left: -3px;
-    top: 45%;
+    top: 50%;
 }
 
+.view_more {
+    font-family: 'Martel', serif;
 
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: xx-large;
+}
 
 
 
