@@ -47,8 +47,6 @@ a:hover, a:active{
     /* Padding: vertical horizontal */
     padding: 30px 15px;
     text-decoration: none;
-    /* Fade effect from ianlunn.github.io/Hover */
-
     vertical-align: middle;
 
 }
@@ -61,7 +59,7 @@ a:hover, a:active{
 
 .home {
     font-size: 50px;
-    padding: 0px;
+    padding: 0;
 }
 
 
