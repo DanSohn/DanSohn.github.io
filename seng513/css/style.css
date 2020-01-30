@@ -41,7 +41,7 @@ a:hover, a:active{
     font-family: 'Open Sans', sans-serif;
     float: left;
     display: block;
-    color: #f2f2f2;
+    color: white;
     text-align: center;
 
     /* Padding: vertical horizontal */
@@ -56,6 +56,37 @@ a:hover, a:active{
     color: #61CDE8;
 }
 
+.nav-stuff::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background-color: #61CDE8;
+    position: relative;
+    top: -10px;
+    width: 0px;
+}
+
+.nav-stuff:hover::before {
+    width: 100%;
+    justify-content: center;
+    transition:  all ease-in-out 300ms;
+}
+.white-bg a{
+    color: #61CDE8;
+}
+
+.white-bg a:hover, a:focus{
+    color: white;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content-wrap {
+    padding-bottom: 72px;
+}
 
 .home {
     font-size: 50px;
@@ -71,7 +102,7 @@ a:hover, a:active{
 .img-text {
     font-family: 'Open Sans', sans-serif;
     position: absolute;
-    top: 40%;
+    top: 40.5%;
     left: 50%;
     transform: translate(-50%,-50%);
     color: #ffffff;
@@ -158,7 +189,7 @@ a:hover, a:active{
     height: 290px;
     left: 50%;
     margin-left: -3px;
-    top: 50%;
+    top: 51.5%;
 }
 
 .view_more {
@@ -179,6 +210,9 @@ a:hover, a:active{
 
 #footer{
     background: #fafafa;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
     text-align: left;
     color: #b1b1b1;
     padding-top: 20px;
