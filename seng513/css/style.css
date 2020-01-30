@@ -178,13 +178,19 @@ a:hover, a:active{
 }
 
 .featured-inner {
-    padding: 14% 7em 2.8em;
+    padding: 0% 7em 2.8em;
     text-align: center;
 }
 
-
+.featured-header {
+    padding-top: 10%;
+    text-align: center;
+    font-weight: normal;
+    font-size: 38px;
+}
 .featured-title {
     font-weight: normal;
+    font-size: 1.3em;
 }
 
 .featured-text {
@@ -205,10 +211,10 @@ a:hover, a:active{
 .vl {
     border-left: 1px solid black;
     position: absolute;
-    height: 290px;
+    height: 150px;
     left: 50%;
     margin-left: -3px;
-    top: 51.5%;
+    top: 73%;
 }
 
 .view_more {
@@ -228,7 +234,7 @@ a:hover, a:active{
 
 
 #footer{
-    background: #fafafa;
+    background: #eee;
     bottom: 0;
     position: absolute;
     width: 100%;
