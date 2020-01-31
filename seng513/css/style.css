@@ -306,12 +306,12 @@ a:hover, a:active{
 }
 
 .description {
-    margin: 10px 120px;
+    margin: 5px 50px 50px;
 }
 
 .description p {
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
@@ -353,7 +353,25 @@ a:hover, a:active{
 }
 
 .insta-handle {
-    margin-top: 50px;
+    margin-top: 10px;
+    width: 40%;
+    display: inline-block;
+}
+
+.insta-handle::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background-color: #61CDE8;
+    position: relative;
+    top: 25px;
+    width: 0;
+}
+
+.insta-handle:hover::before {
+    width: 100%;
+    justify-content: center;
+    transition:  all ease-in-out 300ms;
 }
 /************************/
 /* FOOTER INFO */
