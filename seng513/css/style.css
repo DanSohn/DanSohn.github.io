@@ -290,6 +290,10 @@ a:hover, a:active{
 .drawer p a {
     border-bottom: 4px solid #9a331e;
 }
+
+.drawer p a:hover {
+    color: #9a331e;
+}
 .right {
     float: right;
 }
