@@ -26,6 +26,19 @@ a:hover, a:active{
 }
 
 
+.page-container {
+    position: relative;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+
+}
+
+.content-wrap {
+    padding-bottom: 72px;
+}
+
+
+
 /* The navigation bar */
 .navbar {
     overflow: hidden;
@@ -99,17 +112,6 @@ a:hover, a:active{
     transition:  all ease-in-out 300ms;
 }
 
-.page-container {
-    position: relative;
-    min-height: 100vh;
-    background-color: #f4f4f4;
-
-}
-
-.content-wrap {
-    padding-bottom: 72px;
-}
-
 .home {
     font-size: 50px;
     padding: 0;
@@ -129,8 +131,6 @@ a:hover, a:active{
     transform: translate(-50%,-50%);
     color: #ffffff;
     font-size: 90px;
-
-
 }
 
 .img-text1 {
@@ -148,13 +148,6 @@ a:hover, a:active{
 
     font-size: 37.5px;
 }
-
-.inner {
-    max-width: 1024px;
-    height: auto;
-    margin: 0 auto;
-}
-
 
 .tagline {
     text-align: center;
@@ -240,19 +233,25 @@ a:hover, a:active{
     text-align: center;
     font-size: xx-large;
 }
+/* end of home page */
+
+.inner {
+    background: none;
+    max-width: 1024px;
+    padding-top:150px;
+    padding-bottom: 70px;
+    height: auto;
+    margin: 0 auto;
+    /* same height as top, since nav bar is 80px currently */
+
+}
+
 
 /************************/
 /************************/
 /* Contact Us Page CSS */
 /************************/
 /************************/
-
-.inner .contact-wrapper {
-    background: none;
-    padding-top: 150px;
-    padding-bottom: 70px;
-    /* same height as top, since nav bar is 80px currently */
-}
 
 .drawer {
     background-color: white;
@@ -293,6 +292,70 @@ a:hover, a:active{
 }
 
 /************************/
+/************************/
+/* About Us Page CSS */
+/************************/
+/************************/
+
+
+.inner header h1 {
+    font-size: 50px;
+    border-bottom: 3px solid black;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.description {
+    margin: 10px 120px;
+}
+
+.description p {
+    text-align: center;
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+.person-box {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #e6e6e6;
+    margin: 0 auto 15px;
+    padding: 50px 0 55px;
+    position: relative;
+    display: inline-block;
+}
+
+.person-bio {
+    margin-left: 250px;
+    margin-right: 50px;
+}
+
+.person-bio h2 {
+    font-size: 26px;
+}
+
+.person-bio p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+.person-media {
+    float: left;
+    width: 265px;
+    text-align: center;
+}
+
+.mug {
+    border-radius: 75px;
+    width: 150px;
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto 5px;
+}
+
+.insta-handle {
+    margin-top: 50px;
+}
+/************************/
 /* FOOTER INFO */
 /************************/
 
@@ -307,6 +370,13 @@ a:hover, a:active{
     padding-bottom: 32px;
     font-size: 15px;
     line-height: 20px;
+}
+
+#footer .inner {
+    max-width: 1024px;
+    height: auto;
+    margin: 0 auto;
+    padding: 0 0; /* Overwrite */
 }
 
 #footer a{
