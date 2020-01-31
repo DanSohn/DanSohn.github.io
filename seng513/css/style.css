@@ -34,21 +34,18 @@ a:hover, a:active{
 }
 
 .content-wrap {
-    padding-bottom: 72px;
+    padding-bottom: 70px;
 }
-
-
 
 /* The navigation bar */
 .navbar {
     overflow: hidden;
-    background-color: rgba(255,255,255,0);
+    background-color: white;
     position: fixed; /* Set to fixed position */
     top: 0; /* Position at the top of the page */
     min-width: 100%; /* Full width */
     height: 70px;
-    z-index:9999; /* places it on the forefront of images as well */
-
+    z-index: 10;
 }
 
 /* Links inside the navbar */
@@ -57,38 +54,29 @@ a:hover, a:active{
     font-size: 18px;
     float: left;
     display: block;
-    color: white;
-    text-align: center;
-
-    /* Padding: vertical horizontal */
-    padding: 30px 15px;
-    text-decoration: none;
-    vertical-align: middle;
-
-}
-
-.white-bar {
-    overflow: hidden;
-    background-color: white;
-    position: fixed; /* Set to fixed position */
-    top: 0; /* Position at the top of the page */
-    min-width: 100%; /* Full width */
-    height: 80px;
-    z-index: 10;
-}
-
-.white-bar a {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 18px;
-    float: left;
-    display: block;
     color: #363d3a;
     text-align: center;
 
     /* Padding: vertical horizontal */
-    padding: 30px 15px;
+    padding: 23px 15px;
     text-decoration: none;
     vertical-align: middle;
+}
+
+
+.nav-right {
+    float: right;
+    height: 100%;
+}
+.nav-right a {
+    padding: 12px 0 0;
+}
+
+.nav-right img {
+    width: 25%;
+    height: auto;
+    display: inline-block;
+
 }
 
 /* Change background on mouse-over */
@@ -103,7 +91,7 @@ a:hover, a:active{
     background-color: #61CDE8;
     position: relative;
     top: -10px;
-    width: 0px;
+    width: 0;
 }
 
 .nav-stuff:hover::before {
@@ -186,7 +174,7 @@ a:hover, a:active{
 }
 
 .featured-inner {
-    padding: 0% 7em 2.8em;
+    padding: 0 7em 2.8em;
     text-align: center;
 }
 
