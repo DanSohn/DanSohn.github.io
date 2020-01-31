@@ -288,9 +288,7 @@ a:hover, a:active{
 .drawer p a:hover {
     color: #9a331e;
 }
-.right {
-    float: right;
-}
+
 
 /************************/
 /************************/
@@ -355,7 +353,7 @@ a:hover, a:active{
 
 .insta-handle {
     margin-top: 10px;
-    width: 40%;
+    width: 32%;
     display: inline-block;
 }
 
@@ -365,7 +363,7 @@ a:hover, a:active{
     height: 2px;
     background-color: #61CDE8;
     position: relative;
-    top: 25px;
+    top: 30px;
     width: 0;
 }
 
@@ -400,4 +398,9 @@ a:hover, a:active{
 
 #footer a{
     color: #fff;
+}
+
+.right {
+    float: right;
+    color: #ffffff;
 }
