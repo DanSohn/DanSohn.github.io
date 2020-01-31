@@ -115,8 +115,7 @@ a:hover, a:active{
     font-family: 'Open Sans', sans-serif;
     position: absolute;
     top: 22.5%;
-    left: 18.5%;
-    transform: translate(-50%,-50%);
+    margin-left: 2%;
     color: #ffffff;
     font-size: 90px;
 }
