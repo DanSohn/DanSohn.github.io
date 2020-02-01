@@ -284,9 +284,6 @@ a:hover, a:active{
     line-height: 1.3;
 }
 
-.recipes {
-    padding-top: 50px;
-}
 .row {
     clear: both;
 }
@@ -300,6 +297,11 @@ a:hover, a:active{
 
 .recipe-thumb img {
     width: 100%;
+    transition: transform .5s ease;
+}
+
+.recipe-thumb:hover img {
+    transform: scale(1.1);
 }
 
 .recipe-thumb p {
@@ -309,6 +311,7 @@ a:hover, a:active{
     letter-spacing: 0.6px;
     font-size: medium;
 }
+
 
 /************************/
 /************************/
