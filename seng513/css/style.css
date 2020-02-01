@@ -242,7 +242,6 @@ a:hover, a:active{
 
 #illustration {
     position: relative;
-    margin-bottom: 70px;
 }
 .illustration_box {
     background-image: url("../img/food_bg_text.png");
@@ -288,6 +287,9 @@ a:hover, a:active{
     clear: both;
 }
 
+.recipes {
+    margin-top: 50px;
+}
 .recipe-thumb {
     width: 30%;
     margin: 15px;
