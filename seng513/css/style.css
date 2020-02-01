@@ -170,7 +170,7 @@ a:hover, a:active{
 
 .featured-image {
     display: table-cell;
-    width: 65%;
+    width: 68%;
 }
 
 .featured-info {
@@ -179,7 +179,7 @@ a:hover, a:active{
     position: relative;
     font-weight: normal;
     display: table-cell;
-    width: 35%;
+    width: 32%;
     right: 0;
 
 }
@@ -226,11 +226,16 @@ a:hover, a:active{
 
 .view_more {
     font-family: 'Martel', serif;
-
-    height: 100px;
-    line-height: 100px;
+    width: 300px;
+    line-height: 50px;
     text-align: center;
+    margin: 29px auto;
     font-size: xx-large;
+}
+
+.view_more img {
+    display: block;
+    margin: 0 auto;
 }
 /* end of home page */
 
