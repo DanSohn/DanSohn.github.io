@@ -37,6 +37,18 @@ a:hover, a:active{
     padding-bottom: 70px;
 }
 
+.inner {
+    background: none;
+    max-width: 1024px;
+    padding-top:150px;
+    padding-bottom: 70px;
+    height: auto;
+    margin: 0 auto;
+    /* same height as top, since nav bar is 80px currently */
+
+}
+
+
 /* The navigation bar */
 .navbar {
     overflow: hidden;
@@ -108,6 +120,7 @@ a:hover, a:active{
 
 .img-fluid {
     max-width: 100%;
+    min-width: 100%;
     height: auto;
 }
 
@@ -222,17 +235,55 @@ a:hover, a:active{
 }
 /* end of home page */
 
-.inner {
-    background: none;
-    max-width: 1024px;
-    padding-top:150px;
-    padding-bottom: 70px;
-    height: auto;
-    margin: 0 auto;
-    /* same height as top, since nav bar is 80px currently */
+/************************/
+/************************/
+/* Recipes Page CSS */
+/************************/
+/************************/
 
+#illustration {
+    position: relative;
+    margin-bottom: 70px;
+}
+.illustration_box {
+    background-image: url("../img/food_bg_text.png");
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    align-items: flex-start;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    padding: 20px 120px 0 143px;
+    width: 750px;
+    height: 400px;
+
+    text-align: left;
 }
 
+.illustration_title {
+    letter-spacing: .56px;
+    margin: 0;
+    line-height: 1;
+    font-size: 3em;
+    text-decoration: none;
+}
+
+.illustration_body {
+    margin-top: 35px;
+
+    letter-spacing: .66px;
+    font-size: 1.3em;
+    font-weight: 600;
+    line-height: 1.3;
+}
 
 /************************/
 /************************/
