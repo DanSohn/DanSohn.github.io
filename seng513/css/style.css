@@ -285,6 +285,21 @@ a:hover, a:active{
     line-height: 1.3;
 }
 
+.row {
+    clear: both;
+}
+
+.recipe-thumb {
+    width: 30%;
+    margin: 15px;
+    background-color: white;
+    display: inline-block;
+}
+
+.recipe-thumb img {
+    width: 100%;
+}
+
 /************************/
 /************************/
 /* Contact Us Page CSS */
