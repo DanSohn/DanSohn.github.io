@@ -40,7 +40,6 @@ a:hover, a:active{
 .inner {
     background: none;
     max-width: 1024px;
-    padding-top:150px;
     padding-bottom: 70px;
     height: auto;
     margin: 0 auto;
@@ -285,6 +284,9 @@ a:hover, a:active{
     line-height: 1.3;
 }
 
+.recipes {
+    padding-top: 50px;
+}
 .row {
     clear: both;
 }
@@ -300,12 +302,23 @@ a:hover, a:active{
     width: 100%;
 }
 
+.recipe-thumb p {
+    bottom:0;
+    background-color: white;
+    text-align: center;
+    letter-spacing: 0.6px;
+    font-size: medium;
+}
+
 /************************/
 /************************/
 /* Contact Us Page CSS */
 /************************/
 /************************/
 
+.contact .inner {
+    padding-top: 150px;
+}
 .drawer {
     background-color: white;
     overflow: hidden;
