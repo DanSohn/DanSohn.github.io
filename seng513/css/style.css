@@ -559,13 +559,14 @@ a:hover, a:active{
 .recipe-content ul, .recipe-content ol {
     clear:both;
     margin-bottom: 40px;
+    list-style: none;
+    padding-left: 0;
+
 }
 
 .recipe-content ol {
-    list-style: none;
     counter-reset: numbers;
     margin-left: 0;
-    padding-left: 0;
 }
 .recipe-content ul li {
     font-size: 18px;
