@@ -543,6 +543,102 @@ a:hover, a:active{
     font-size: 20px;
 }
 
+.ingredients {
+    display: inline-block;
+    float: left;
+    width: 345px;
+    margin-right: 60px;
+}
+
+.recipe h2 {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+}
+
+
+.recipe-content ul, .recipe-content ol {
+    clear:both;
+    margin-bottom: 40px;
+}
+
+.recipe-content ol {
+    list-style: none;
+    counter-reset: numbers;
+    margin-left: 0;
+    padding-left: 0;
+}
+.recipe-content ul li {
+    font-size: 18px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    line-height: 1.6;
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 20px;
+}
+
+.measurement {
+    font-weight: 800;
+}
+
+.directions {
+    display: inline-block;
+    width: 345px;
+    margin-right: 0;
+    float: right;
+}
+
+.directions ol li {
+    counter-increment: numbers;
+    position: relative;
+    margin-left: 35px;
+    line-height: 1.2;
+    font-size: 18px;
+}
+
+.directions ol li:before {
+    display: inline-block;
+    content: counter(numbers);
+    width: 19px;
+    line-height: 19px;
+    background: #f4f4f4;
+    font-size: 12px;
+    text-align: center;
+    margin-right: 15px;
+    position: absolute;
+    top: 7px;
+    left: -35px;
+    font-family: montserrat,Arial,sans-serif;
+}
+
+
+.nutrition {
+    clear: both;
+}
+
+.nutrition table {
+    font-family: 'Karla', sans-serif;
+    border-collapse: collapse;
+    margin: auto;
+    padding-top: 30px;
+    width: 80%;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* For the numbers, it should be right aligned */
+.nutrition table .table_numbers {
+    text-align: right;
+}
+
+.nutrition table th {
+    font-size: 18px;
+    border-bottom: 1px solid black;
+
+}
+
+.nutrition table tr {
+    height: 35px;
+
+}
 
 /************************/
 /* FOOTER INFO */
