@@ -448,6 +448,72 @@ a:hover, a:active{
     justify-content: center;
     transition:  all ease-in-out 300ms;
 }
+
+
+/************************/
+/* Soondobu!*/
+/************************/
+
+.recipe-area {
+    background-color: white;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+.recipe-front {
+    background-color: #E87454;
+    position: relative;
+    display: table;
+    -webkit-font-smoothing: antialiased;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.recipe-img {
+    display: table-cell;
+    width: 50%;
+}
+
+.recipe-summary {
+    font-family: 'Martel', serif;
+    vertical-align: top;
+    position: relative;
+    display: table-cell;
+    width: 50%;
+    right: 0;
+
+    color: white;
+}
+
+.recipe-summary h1 {
+    font-family: 'Karla', sans-serif;
+
+    font-size: 4em;
+    margin-top: 20%;
+    margin-left: 5%;
+
+}
+
+.recipe-summary p {
+    margin-left: 5%;
+
+}
+
+.recipe-summary .recipe-thumb {
+    background-color: #702F24;
+    width: 43%;
+    height: 110px;
+}
+
+.recipe-summary .recipe-thumb h2 {
+    text-align: center;
+    margin-top: 30px;
+    line-height: 1.5;
+    font-weight: lighter;
+    color: white;
+}
+
+
+
 /************************/
 /* FOOTER INFO */
 /************************/
