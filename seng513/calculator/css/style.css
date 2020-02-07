@@ -54,3 +54,23 @@ button {
     grid-gap: 20px;
     padding: 20px;
 }
+
+
+@media screen and (max-width: 600px){
+    #calculator {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .input_area {
+        width: 93.5%;
+    }
+    .calculator_border {
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+    .calculator_buttons {
+        grid-gap: 20px 3%;
+        padding: 3%;
+    }
+}

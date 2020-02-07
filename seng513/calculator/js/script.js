@@ -141,13 +141,12 @@ function process_calculator(){
 
         // doing the check if i just finished the expression, in which the next button pressed should then
         // reset the current display
-
         if(calculator.exp_completed === true){
             calculator.exp_completed = false;
             calculator.curr_display = "";
         }
 
-
+        // If I clicked in the calculator area, but not an actual button, just do nothing
         if(!target.matches("button")){
             console.log("Button was not pressed");
             return;
