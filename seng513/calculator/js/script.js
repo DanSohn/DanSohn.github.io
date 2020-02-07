@@ -3,9 +3,7 @@ window.addEventListener("load", process_calculator);
 
 let calculator = {
     curr_display: "0",
-    first_op: null,
-    waiting_for_second_op: false,
-    operator: null
+    curr_num: ""
 };
 
 // function will cover all digits
@@ -17,21 +15,28 @@ function input_digit(digit){
     }else{
         calculator.curr_display = curr_display + digit;
     }
+    calculator.curr_num += digit;
 }
 
 
 //function will handle decimals
-function input_decimals(decimal){
+function input_decimal(){
     // TODO: Check if its for the current number, since on the screen i'll have multiple numbers, decimals allowed for each
-    const {curr_display} = calculator;
+    console.log("Handling decimal");
+    let dot = ".";
+    const {curr_num} = calculator;
     // case 1: what if i already have a decimal in the current number? do nothing. Check only for when there is
-    if(!curr_display.includes(decimal)){
-        calculator.curr_display += decimal;
+    if(!curr_num.includes(dot)){
+        calculator.curr_display += dot;
+        calculator.curr_num += dot;
+
     }
 }
 // function will cover both clear and all clear
 // it will just get rid of the last digit, or reset current display to be 0
 function input_clear(clear){
+    console.log("Handling clear");
+
     const {curr_display} = calculator;
     let display_length = curr_display.length;
     // if the function is just single backspace clear
@@ -41,6 +46,34 @@ function input_clear(clear){
         // the AC all clear
         calculator.curr_display = "0";
     }
+}
+
+
+// function will handle operator inputs
+function input_operator(op){
+    console.log("Handling operator");
+    const {curr_display} = calculator;
+
+    let display_length = curr_display.length;
+    let last_input = curr_display.charAt(display_length-1);
+    let operator_str = "+-/*";
+    // i reset the current number back to nothing
+    calculator.curr_num  = "";
+
+    // if the last input is already an operator, I will replace it. This is my calculator design, I don't want error
+    if(operator_str.includes(last_input)){
+        calculator.curr_display = curr_display.substring(0, display_length-1) + op;
+    }else{
+        //if the last one wasn't an operator already, then continue as usual
+        calculator.curr_display += op;
+    }
+}
+
+
+// evaluate the current calculator display
+function input_equal(){
+    console.log("Evaluating current expression");
+    calculator.curr_display = eval(calculator.curr_display);
 }
 
 
@@ -61,10 +94,11 @@ function process_calculator(){
         }
         if(target.className === "operator"){
             console.log("Operator", val);
+            input_operator(val);
 
         }else if(target.className === "decimal"){
             console.log("Decimal", val);
-            input_decimal(val);
+            input_decimal();
 
         }else if(target.className === "clear"){
             console.log("Clear", val);
@@ -76,6 +110,7 @@ function process_calculator(){
 
         }else if(target.className === "equal-sign"){
             console.log("Equal Sign", val);
+            input_equal();
 
         }else{
             console.log("Digit", val);
