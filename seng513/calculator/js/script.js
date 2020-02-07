@@ -22,7 +22,15 @@ function input_digit(digit){
 // function will cover both clear and all clear
 // it will just get rid of the last digit, or reset current display to be 0
 function input_clear(clear){
-    
+    const {curr_display} = calculator;
+    let display_length = curr_display.length;
+    // if the function is just single backspace clear
+    if(clear === "clear"){
+        calculator.curr_display = curr_display.substring(0,display_length-1);
+    }else{
+        // the AC all clear
+        calculator.curr_display = "0";
+    }
 }
 
 
