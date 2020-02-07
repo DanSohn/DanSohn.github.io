@@ -22,6 +22,7 @@ function input_digit(digit){
 
 //function will handle decimals
 function input_decimals(decimal){
+    // TODO: Check if its for the current number, since on the screen i'll have multiple numbers, decimals allowed for each
     const {curr_display} = calculator;
     // case 1: what if i already have a decimal in the current number? do nothing. Check only for when there is
     if(!curr_display.includes(decimal)){
