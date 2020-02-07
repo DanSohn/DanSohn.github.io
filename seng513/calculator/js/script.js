@@ -9,6 +9,8 @@ function process_calculator(){
     const calc_keys = document.querySelector(".calculator_buttons");
     console.log(calc_keys);
     calc_keys.addEventListener('click', (event) => {
+        // Object deconstruction getting target property of click event.
+        // Equivalent to const target = event.target;
         const {target} = event;
         if(!target.matches("button")){
             console.log("Button was not pressed");
@@ -16,14 +18,21 @@ function process_calculator(){
         }
         if(target.className === "operator"){
             console.log("Operator", target.value);
-            return;
+        }else if(target.className === "decimal"){
+            console.log("Decimal", target.value);
+        }else if(target.className === "clear"){
+            console.log("Clear", target.value);
+        }else if(target.className === "all-clear"){
+            console.log("All Clear", target.value);
+        }else if(target.className === "equal-sign"){
+            console.log("Equal Sign", target.value);
+        }else{
+            console.log("Digit", target.value);
         }
+
     });
 }
 
-function get_key_pressed(){
-    console.log("Getting key pressed");
-}
 function update_display(){
     const output = document.querySelector('input_area');
     output.value = calculator.display_value;
