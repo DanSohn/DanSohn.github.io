@@ -1,3 +1,5 @@
+// TODO: Handle brackets properly if in the form 1(5*2) -> do i not use eval for the actual calculation?
+
 // Wait until html and css is fully loaded before executing javascript
 window.addEventListener("load", process_calculator);
 
@@ -106,6 +108,7 @@ function input_equal(){
     if(curr_display !== ""){
         // if the evaluation is good, just display it. However if "undefined", change wording to ERROR
         res = eval(curr_display);
+        console.log("ERROR: ", res);
         if(res === "undefined") {
             res = "ERROR";
         }
