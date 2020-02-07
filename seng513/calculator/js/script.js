@@ -30,7 +30,6 @@ function input_decimal(){
     if(!curr_num.includes(dot)){
         calculator.curr_display += dot;
         calculator.curr_num += dot;
-
     }
 }
 // function will cover both clear and all clear
@@ -90,17 +89,31 @@ function input_operator(op){
 
 }
 
+//function will handle brackets
+function input_bracket(bracket_type){
+    console.log("Handling a bracket");
+    calculator.curr_display += bracket_type;
+    calculator.curr_num = "";
+}
 
 // evaluate the current calculator display
 function input_equal(){
     console.log("Evaluating current expression");
+    const {curr_display, prev_val} = calculator;
+    let res = "";
     // if the current display has something in it, evaluate it. However, if its empty (only when you just did a
     // calculation, just show the previous value
-    if(calculator.curr_display !== ""){
-        calculator.curr_display = eval(calculator.curr_display);
+    if(curr_display !== ""){
+        // if the evaluation is good, just display it. However if "undefined", change wording to ERROR
+        res = eval(curr_display);
+        if(res === "undefined") {
+            res = "ERROR";
+        }
     }else{
-        calculator.curr_display = calculator.prev_val;
+        res = prev_val;
     }
+
+    calculator.curr_display = res;
 
     update_display();
 
@@ -140,10 +153,12 @@ function process_calculator(){
             console.log("Operator", val);
             input_operator(val);
 
-        }else if(target.className === "decimal"){
+        }else if(target.className === "decimal") {
             console.log("Decimal", val);
             input_decimal();
-
+        }else if(target.className === "bracket"){
+            console.log("Bracket", val);
+            input_bracket(val);
         }else if(target.className === "clear"){
             console.log("Clear", val);
             input_clear(val);
