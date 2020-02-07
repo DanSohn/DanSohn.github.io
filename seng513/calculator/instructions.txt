@@ -1,0 +1,19 @@
+SENG513 Assignment 2
+Jung Hyun Sohn
+30017825
+
+URL:
+https://dansohn.github.io/seng513/calculator/
+
+Browsers tested:
+Google Chrome, Mozilla Firefox
+
+Instructions:
+Use this calculator like any other! Go to the url above, and it will be ready to go right away.
+
+Some features:
+If you press equal multiple times, it will keep the same value that was just computed
+If you press an operator, after pressing an operator, it will replace, not just add it on and provide an error. User experience!
+
+C means clear, and will backspace once
+AC means all clear, and will wipe the whole user input
