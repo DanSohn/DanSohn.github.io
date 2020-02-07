@@ -65,6 +65,10 @@ button {
     .input_area {
         width: 93.5%;
     }
+
+    .input_border{
+        margin: 0 3%;
+    }
     .calculator_border {
         margin-left: 3%;
         margin-right: 3%;
