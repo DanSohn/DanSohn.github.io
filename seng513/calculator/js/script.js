@@ -3,7 +3,9 @@ window.addEventListener("load", process_calculator);
 
 let calculator = {
     curr_display: "0",
-    curr_num: ""
+    curr_num: "",
+    prev_val: "",
+    exp_completed: false
 };
 
 // function will cover all digits
@@ -21,7 +23,6 @@ function input_digit(digit){
 
 //function will handle decimals
 function input_decimal(){
-    // TODO: Check if its for the current number, since on the screen i'll have multiple numbers, decimals allowed for each
     console.log("Handling decimal");
     let dot = ".";
     const {curr_num} = calculator;
@@ -37,14 +38,20 @@ function input_decimal(){
 function input_clear(clear){
     console.log("Handling clear");
 
-    const {curr_display} = calculator;
+    const {curr_display, curr_num} = calculator;
     let display_length = curr_display.length;
+    let last_input = curr_display.charAt(display_length-1);
     // if the function is just single backspace clear
     if(clear === "clear"){
         calculator.curr_display = curr_display.substring(0,display_length-1);
+        if(!isNaN(last_input) || last_input === "."){
+            calculator.curr_num = curr_num.substring(0, display_length-1);
+        }
     }else{
         // the AC all clear
         calculator.curr_display = "0";
+        calculator.curr_num = "";
+
     }
 }
 
@@ -60,20 +67,38 @@ function input_operator(op){
     // i reset the current number back to nothing
     calculator.curr_num  = "";
 
-    // if the last input is already an operator, I will replace it. This is my calculator design, I don't want error
-    if(operator_str.includes(last_input)){
-        calculator.curr_display = curr_display.substring(0, display_length-1) + op;
+    console.log("Checking prev val and curr display ---", calculator.prev_val, calculator.curr_display);
+    // Case where I previously did a calculation, and want to continue operating on the answer
+    if((calculator.prev_val !== "") && (calculator.curr_display === "")){
+        console.log("Continuing previous calculation");
+        calculator.curr_display = calculator.prev_val + op;
     }else{
-        //if the last one wasn't an operator already, then continue as usual
-        calculator.curr_display += op;
+        // if the last input is already an operator, I will replace it. This is my calculator design, I don't want error
+        if(operator_str.includes(last_input)){
+            calculator.curr_display = curr_display.substring(0, display_length-1) + op;
+        }else{
+            //if the last one wasn't an operator already, then continue as usual
+            calculator.curr_display += op;
+        }
     }
+
 }
 
 
 // evaluate the current calculator display
 function input_equal(){
     console.log("Evaluating current expression");
-    calculator.curr_display = eval(calculator.curr_display);
+    if(calculator.curr_display !== ""){
+        calculator.curr_display = eval(calculator.curr_display);
+    }else{
+        calculator.curr_display = calculator.prev_val;
+    }
+
+    update_display();
+
+    calculator.curr_num = "";
+    calculator.prev_val = calculator.curr_display;
+    calculator.exp_completed = true;
 }
 
 
@@ -84,10 +109,21 @@ function process_calculator(){
     const calc_keys = document.querySelector(".calculator_buttons");
     //console.log(calc_keys);
     calc_keys.addEventListener('click', (event) => {
+        console.log("-------- Button Pressed ---------");
         // Object deconstruction getting target property of click event.
         // Equivalent to const target = event.target;
         const {target} = event;
         let val = target.value;
+
+        // doing the check if i just finished the expression, in which the next button pressed should then
+        // reset the current display
+
+        if(calculator.exp_completed === true){
+            calculator.exp_completed = false;
+            calculator.curr_display = "";
+        }
+
+
         if(!target.matches("button")){
             console.log("Button was not pressed");
             return;
@@ -109,8 +145,13 @@ function process_calculator(){
             input_clear(val);
 
         }else if(target.className === "equal-sign"){
+            // this case is special, since I'm not just updating display
+            // but also "resetting it". Hence, i update_display in the actual function
             console.log("Equal Sign", val);
             input_equal();
+            console.log("Current number: ", calculator.curr_num);
+
+            return;
 
         }else{
             console.log("Digit", val);
@@ -118,6 +159,7 @@ function process_calculator(){
         }
 
         update_display();
+        console.log("Current number: ", calculator.curr_num);
     });
 }
 
@@ -126,5 +168,3 @@ function update_display(){
     const output = document.querySelector('.input_area');
     output.value = calculator.curr_display;
 }
-
-update_display();
