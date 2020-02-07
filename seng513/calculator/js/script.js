@@ -19,6 +19,15 @@ function input_digit(digit){
     }
 }
 
+
+//function will handle decimals
+function input_decimals(decimal){
+    const {curr_display} = calculator;
+    // case 1: what if i already have a decimal in the current number? do nothing. Check only for when there is
+    if(!curr_display.includes(decimal)){
+        calculator.curr_display += decimal;
+    }
+}
 // function will cover both clear and all clear
 // it will just get rid of the last digit, or reset current display to be 0
 function input_clear(clear){
@@ -44,25 +53,32 @@ function process_calculator(){
         // Object deconstruction getting target property of click event.
         // Equivalent to const target = event.target;
         const {target} = event;
+        let val = target.value;
         if(!target.matches("button")){
             console.log("Button was not pressed");
             return;
         }
         if(target.className === "operator"){
-            console.log("Operator", target.value);
+            console.log("Operator", val);
+
         }else if(target.className === "decimal"){
-            console.log("Decimal", target.value);
+            console.log("Decimal", val);
+            input_decimal(val);
+
         }else if(target.className === "clear"){
-            console.log("Clear", target.value);
-            input_clear(target.value);
+            console.log("Clear", val);
+            input_clear(val);
+
         }else if(target.className === "all-clear"){
-            console.log("All Clear", target.value)
-            input_clear(target.value);
+            console.log("All Clear", val);
+            input_clear(val);
+
         }else if(target.className === "equal-sign"){
-            console.log("Equal Sign", target.value);
+            console.log("Equal Sign", val);
+
         }else{
-            console.log("Digit", target.value);
-            input_digit(target.value);
+            console.log("Digit", val);
+            input_digit(val);
         }
 
         update_display();
