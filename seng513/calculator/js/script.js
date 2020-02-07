@@ -43,7 +43,13 @@ function input_clear(clear){
     let last_input = curr_display.charAt(display_length-1);
     // if the function is just single backspace clear
     if(clear === "clear"){
-        calculator.curr_display = curr_display.substring(0,display_length-1);
+        // this is the case if i just calculated something, in which i want C to do like AC, clear everything
+        // OR, the case where i have just a single digit left, i should still display 0
+        if(display_length <= 1){
+            calculator.curr_display = "0";
+        }else{
+            calculator.curr_display = curr_display.substring(0,display_length-1);
+        }
         if(!isNaN(last_input) || last_input === "."){
             calculator.curr_num = curr_num.substring(0, display_length-1);
         }
@@ -88,6 +94,8 @@ function input_operator(op){
 // evaluate the current calculator display
 function input_equal(){
     console.log("Evaluating current expression");
+    // if the current display has something in it, evaluate it. However, if its empty (only when you just did a
+    // calculation, just show the previous value
     if(calculator.curr_display !== ""){
         calculator.curr_display = eval(calculator.curr_display);
     }else{
