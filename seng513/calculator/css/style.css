@@ -50,6 +50,14 @@ button {
     color: #333;
 }
 
+button:hover {
+    background-color: #e6e6e6;
+}
+
+
+button:active {
+    background-color: #9e9e9e;
+}
 .calculator_buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
