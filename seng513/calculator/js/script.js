@@ -7,7 +7,8 @@ let calculator = {
     curr_display: "0",
     curr_num: "",
     prev_val: "",
-    exp_completed: false
+    exp_completed: false,
+    bracket_used: false
 };
 
 // function will cover all digits
@@ -54,11 +55,16 @@ function input_clear(clear){
         if(!isNaN(last_input) || last_input === "."){
             calculator.curr_num = curr_num.substring(0, display_length-1);
         }
+
+        // everytime i backspace, i also have to check if I have used brackets or not, which would change my parsing
+        if(!(curr_display.includes("(") && curr_display.includes(")"))){
+            calculator.bracket_used = false;
+        }
     }else{
         // the AC all clear
         calculator.curr_display = "0";
         calculator.curr_num = "";
-
+        calculator.bracket_used = false;
     }
 }
 
@@ -96,12 +102,17 @@ function input_bracket(bracket_type){
     console.log("Handling a bracket");
     calculator.curr_display += bracket_type;
     calculator.curr_num = "";
+
+    // so im not doing multiple true assertments if unneccessary
+    if(calculator.bracket_used === false){
+        calculator.bracket_used = true;
+    }
 }
 
 // evaluate the current calculator display
 function input_equal(){
     console.log("Evaluating current expression");
-    const {curr_display, prev_val} = calculator;
+    const {curr_display, prev_val, bracket_used} = calculator;
     let res = "";
     // if the current display has something in it, evaluate it. However, if its empty (only when you just did a
     // calculation, just show the previous value
@@ -111,6 +122,15 @@ function input_equal(){
         console.log("ERROR: ", res);
         if(res === "undefined") {
             res = "ERROR";
+        }
+
+
+        // if i used brackets, then there will be a problem using eval, so parse the expression first
+        if(bracket_used === true){
+            res = parseExp(curr_display);
+            res = eval(res);
+        }else{
+            res = eval(curr_display);
         }
     }else{
         res = prev_val;
@@ -125,6 +145,28 @@ function input_equal(){
     calculator.exp_completed = true;
 }
 
+// function to parse an expression, only called when it contains brackets
+function parseExp(expression){
+    //examples: (TESTED)
+    // 5(2)
+    // (2)(2)
+    // (2) + (2)
+    // (5)2 + (2)((5))
+    // 5+(2)((3-2)5)*3(1)
+    let i = 1;
+    while(i < expression.length - 1){
+        if(expression[i] === "(" && !isNaN(expression[i-1])){
+            expression = expression.slice(0, i) + "*" + expression.slice(i);
+        }else if(expression[i] === "(" && expression[i-1] === ")"){
+            expression = expression.slice(0, i) + "*" + expression.slice(i);
+        }else if(!isNaN(expression[i]) && expression[i-1] === ")"){
+            expression = expression.slice(0, i) + "*" + expression.slice(i);
+        }
+        i++;
+    }
+
+    return expression;
+}
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 // using event listener with arrow function
@@ -146,6 +188,10 @@ function process_calculator(){
             calculator.curr_display = "";
         }
 
+        // temporary check if there is a bracket in teh current display
+        if(calculator.bracket_used === true){
+            console.log("There is a bracket in my input");
+        }
         // If I clicked in the calculator area, but not an actual button, just do nothing
         if(!target.matches("button")){
             console.log("Button was not pressed");
