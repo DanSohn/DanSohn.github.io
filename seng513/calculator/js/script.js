@@ -128,9 +128,14 @@ function input_equal(){
         // if i used brackets, then there will be a problem using eval, so parse the expression first
         if(bracket_used === true){
             res = parseExp(curr_display);
-            res = eval(res);
         }else{
-            res = eval(curr_display);
+            res = curr_display;
+        }
+
+        try {
+            res = eval(res);
+        }catch(e){
+            res = "ERROR";
         }
     }else{
         res = prev_val;
