@@ -1,4 +1,4 @@
-// TODO: Handle brackets properly if in the form 1(5*2) -> do i not use eval for the actual calculation?
+// TODO: Fix multiple zero problems
 
 // Wait until html and css is fully loaded before executing javascript
 window.addEventListener("load", process_calculator);
@@ -117,14 +117,6 @@ function input_equal(){
     // if the current display has something in it, evaluate it. However, if its empty (only when you just did a
     // calculation, just show the previous value
     if(curr_display !== ""){
-        // if the evaluation is good, just display it. However if "undefined", change wording to ERROR
-        res = eval(curr_display);
-        console.log("ERROR: ", res);
-        if(res === "undefined") {
-            res = "ERROR";
-        }
-
-
         // if i used brackets, then there will be a problem using eval, so parse the expression first
         if(bracket_used === true){
             res = parseExp(curr_display);
@@ -152,6 +144,7 @@ function input_equal(){
 
 // function to parse an expression, only called when it contains brackets
 function parseExp(expression){
+    console.log("Changing bracket expression to be friendly");
     //examples: (TESTED)
     // 5(2)
     // (2)(2)
@@ -169,7 +162,7 @@ function parseExp(expression){
         }
         i++;
     }
-
+    console.log("Returning ", expression);
     return expression;
 }
 
