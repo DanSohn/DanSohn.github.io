@@ -15,5 +15,7 @@ Some features:
 If you press equal multiple times, it will keep the same value that was just computed
 If you press an operator, after pressing an operator, it will replace, not just add it on and provide an error. User experience!
 
-C means clear, and will backspace once
+To reuse the previous calculation, you just have to continue with it with an operator. Using a digit, will instead restart a new calculation
+
+BS means clear / backspace, and will backspace once
 AC means all clear, and will wipe the whole user input
