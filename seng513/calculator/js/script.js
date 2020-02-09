@@ -171,7 +171,7 @@ function parseExp(expression){
     // (5)2 + (2)((5))
     // 5+(2)((3-2)5)*3(1)
     let i = 1;
-    while(i < expression.length - 1){
+    while(i < expression.length){
         if(expression[i] === "(" && !isNaN(expression[i-1])){
             expression = expression.slice(0, i) + "*" + expression.slice(i);
         }else if(expression[i] === "(" && expression[i-1] === ")"){
