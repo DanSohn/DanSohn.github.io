@@ -47,6 +47,8 @@ function input_clear(clear){
     const {curr_display, curr_num} = calculator;
     let display_length = curr_display.length;
     let last_input = curr_display.charAt(display_length-1);
+    let operator_str = "+-/*";
+
     // if the function is just single backspace clear
     if(clear === "clear"){
         // this is the case if i just calculated something, in which i want C to do like AC, clear everything
@@ -55,11 +57,17 @@ function input_clear(clear){
             calculator.curr_display = "0";
             calculator.curr_num = "0";
         }else{
+            // this is the regular case
             calculator.curr_display = curr_display.substring(0,display_length-1);
         }
+        // if the last inputted item is a digit or a decimal:
         if(!isNaN(last_input) || last_input === "."){
             let curr_num_length = curr_num.length;
             calculator.curr_num = curr_num.substring(0, curr_num_length-1);
+        // else if the last item was an operator
+        }else if(operator_str.includes(last_input)){
+            // then i must worry about what the current number is now
+            calculator.curr_num = find_current_num();
         }
 
         // everytime i backspace, i also have to check if I have used brackets or not, which would change my parsing
@@ -242,4 +250,23 @@ function process_calculator(){
 function update_display(){
     const output = document.querySelector('.input_area');
     output.value = calculator.curr_display;
+}
+
+
+// finding the current number
+function find_current_num(){
+    console.log("Finding current number -----------------");
+    const {curr_display} = calculator;
+    const display_length = curr_display.length;
+    let non_digits = "+-*/()";
+    let i = 0;
+    // loop through the current display from the back, and find the next non-digit
+    for(i = display_length-1; i >= 0; i--){
+        if(non_digits.includes(curr_display[i])){
+            break;
+        }
+    }
+
+    return curr_display.substring(i+1);
+
 }
