@@ -18,7 +18,7 @@ function input_digit(digit){
     let display_length = curr_display.length;
 
     if(curr_num === '0'){
-        calculator.curr_num = digit
+        calculator.curr_num = digit;
         // this should remove the last digit
         calculator.curr_display = curr_display.substring(0, display_length-1) + digit;
     }else{
@@ -60,8 +60,8 @@ function input_clear(clear){
             // this is the regular case
             calculator.curr_display = curr_display.substring(0,display_length-1);
         }
-        // if the last inputted item is a digit or a decimal:
-        if(!isNaN(last_input) || last_input === "."){
+        // if the last inputted item is a digit or a decimal and not worrying about if curr display has 1 digit:
+        if((!isNaN(last_input) || last_input === ".") && display_length !== 1){
             let curr_num_length = curr_num.length;
             calculator.curr_num = curr_num.substring(0, curr_num_length-1);
         // else if the last item was an operator
@@ -151,7 +151,8 @@ function input_equal(){
 
     update_display();
 
-    calculator.curr_num = "";
+    calculator.curr_display = "0";
+    calculator.curr_num = "0";
     calculator.prev_val = calculator.curr_display;
     calculator.exp_completed = true;
 }
