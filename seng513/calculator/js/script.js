@@ -1,5 +1,9 @@
-// TODO: Fix multiple zero problems
-
+/*
+SENG 513 Assignment 2
+Jung Hyun Sohn
+30017825
+Tutorial 5
+ */
 // Wait until html and css is fully loaded before executing javascript
 window.addEventListener("load", process_calculator);
 
