@@ -5,7 +5,7 @@ window.addEventListener("load", process_calculator);
 
 let calculator = {
     curr_display: "0",
-    curr_num: "",
+    curr_num: "0",
     prev_val: "",
     exp_completed: false,
     bracket_used: false
@@ -14,13 +14,17 @@ let calculator = {
 // function will cover all digits
 function input_digit(digit){
     console.log("function input_digit");
-    const {curr_display} = calculator;
-    if(curr_display === '0'){
-        calculator.curr_display = digit;
+    const {curr_display, curr_num} = calculator;
+    let display_length = curr_display.length;
+
+    if(curr_num === '0'){
+        calculator.curr_num = digit
+        // this should remove the last digit
+        calculator.curr_display = curr_display.substring(0, display_length-1) + digit;
     }else{
         calculator.curr_display = curr_display + digit;
+        calculator.curr_num += digit;
     }
-    calculator.curr_num += digit;
 }
 
 
@@ -49,11 +53,13 @@ function input_clear(clear){
         // OR, the case where i have just a single digit left, i should still display 0
         if(display_length <= 1){
             calculator.curr_display = "0";
+            calculator.curr_num = "0";
         }else{
             calculator.curr_display = curr_display.substring(0,display_length-1);
         }
         if(!isNaN(last_input) || last_input === "."){
-            calculator.curr_num = curr_num.substring(0, display_length-1);
+            let curr_num_length = curr_num.length;
+            calculator.curr_num = curr_num.substring(0, curr_num_length-1);
         }
 
         // everytime i backspace, i also have to check if I have used brackets or not, which would change my parsing
@@ -63,7 +69,7 @@ function input_clear(clear){
     }else{
         // the AC all clear
         calculator.curr_display = "0";
-        calculator.curr_num = "";
+        calculator.curr_num = "0";
         calculator.bracket_used = false;
     }
 }
