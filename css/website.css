@@ -21,18 +21,6 @@ body {
   box-sizing: border-box;
 }
 
-.box1 {
-  float: left;
-  width: 30%;
-  padding: 30px;
-}
-
-.box2 {
-  float: right;
-  width: 60%;
-  padding: 30px;
-}
-
 .clearfix::after {
   content: "";
   clear: both;
@@ -103,7 +91,7 @@ a img {
 
 #myself{
   background-color: #C7C7C7;
-  height: 570px;
+  height: auto;
   margin-top: -30px;
   font-size: 24px;
   line-height: 40px;
@@ -111,6 +99,14 @@ a img {
 }
 
 
+.myself-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
 
 #code {
   border-radius: 5px;
@@ -248,7 +244,6 @@ img.icon {
   z-index: 0;
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);   /*For Webkit browsers */
-  filter: gray;  /* For IE 6 - 9 */
   -webkit-transition: all .4s ease;
 }
 
@@ -324,6 +319,9 @@ img.icon:hover {
   line-height: 20px;
 }
 
+#footer .inner{
+  margin: 0 5%;
+}
 .right {
   float: right;
 }
@@ -478,9 +476,6 @@ ul.toc {
   height: auto;
   margin: 0 auto;
   }
-  #myself{
-    font-size: 10px;  
-  }
   #myself-text{
   clear: both;
   }
@@ -587,9 +582,9 @@ ul.toc {
 
   #header {
     padding-top: 20px;
-    text-align: left;
     padding-left: 10px;
     padding-bottom: 15px;
+    line-height: normal;
   }
 
   #header .name {
