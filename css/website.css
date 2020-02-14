@@ -334,8 +334,8 @@ img.icon:hover {
     max-width: 900px;
     margin: 0 auto;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     padding: 70px 50px 0 10px;
 }
 
@@ -423,7 +423,7 @@ a.toc-link:hover {
     z-index: 10;
     text-align: center;
     opacity: 0.5;
-    right: 0px;
+    right: 0;
     background: #fafafa;
     width: auto;
     padding-top: 60px;
@@ -437,7 +437,7 @@ a.toc-link:hover {
 }
 
 ul.toc {
-    -webkit-padding-start: 0px;
+    -webkit-padding-start: 0;
 }
 
 .toc-h1 a {
@@ -624,7 +624,7 @@ ul.toc {
     }
 
     #illustration {
-        padding-bottom: 0px;
+        padding-bottom: 0;
     }
 
     #illustration img {
@@ -697,7 +697,7 @@ ul.toc {
     }
 
     #about .inner {
-        padding: 0px 10px 0px 10px;
+        padding: 0 10px 0 10px;
     }
 
     #code, #console {
