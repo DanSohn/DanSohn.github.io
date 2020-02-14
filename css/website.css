@@ -84,7 +84,7 @@ a img {
 }
 
 #about{
-  background-color: #C26868;
+  background-color: #395E75;
   height: 1020px;
   margin-top: -30px;
 }
@@ -93,6 +93,7 @@ a img {
   background-color: #C7C7C7;
   height: auto;
   margin-top: -30px;
+  margin-bottom: 30px;
   font-size: 24px;
   line-height: 40px;
   -webkit-font-smoothing: antialiased;
@@ -102,11 +103,11 @@ a img {
 .myself-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   align-content: center;
 }
+
 
 #code {
   border-radius: 5px;
@@ -216,10 +217,8 @@ span.answer{
 }
 
 img.portrait{
-  width: 300px;
-  height: 300px;
-  margin-top: 100px;
-  float: left;
+  width: 250px;
+  height: 250px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
