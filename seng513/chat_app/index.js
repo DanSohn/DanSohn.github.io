@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const http = require('http').createServer(app);
+const server = require('http').createServer(app);
 
 const socket_io = require('socket.io');
-var io = socket_io(http);
+var io = socket_io(server);
 
 
 const PORT = 3000;
@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
 });
 
 // our http server listens to port 3000
-http.listen(PORT, () => {
+server.listen(PORT, (err) => {
+    if (err) throw err;
     console.log('listening on *:3000');
 });
