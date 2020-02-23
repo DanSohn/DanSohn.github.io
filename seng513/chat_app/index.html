@@ -5,6 +5,7 @@
     <title>Dan's Chat App</title>
     <link href= "css/style.css" rel="stylesheet">
     <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
 </head>
 <body>
@@ -12,9 +13,16 @@
 <form action="">
     <input id="m" autocomplete="off" /><button>Send</button>
 </form>
-
 <script>
-    var socket = io();
+    $(() => {
+        var socket = io();
+        $('form').submit( (e) => {
+            e.preventDefault(); //prevents page reloading
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('');
+            return false;
+        });
+    });
 </script>
 </body>
 </html>
