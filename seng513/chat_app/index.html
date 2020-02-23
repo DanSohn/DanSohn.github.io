@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dan's Chat App</title>
+    <link href= "css/style.css" rel="stylesheet">
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+
 </head>
 <body>
+<ul id="messages"></ul>
+<form action="">
+    <input id="m" autocomplete="off" /><button>Send</button>
+</form>
 
+<script>
+    var socket = io();
+</script>
 </body>
 </html>
