@@ -158,7 +158,7 @@ function input_equal(){
     calculator.curr_display = "0";
     calculator.curr_num = "0";
     calculator.prev_val = calculator.curr_display;
-    calculator.exp_completed = true;
+    calculator.f = true;
 }
 
 // function to parse an expression, only called when it contains brackets
