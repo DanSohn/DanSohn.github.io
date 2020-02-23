@@ -16,7 +16,10 @@ app.get('/', (req, res) => {
 
 //listen on the connection event for incoming sockets
 io.on('connection', (socket) => {
-    console.log('a user connected')
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
 });
 
 // our http server listens to port 3000
