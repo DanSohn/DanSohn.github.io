@@ -46,11 +46,13 @@ io.on('connection', (socket) => {
 
     socket.on('availableUsers', handleGetAvailableUsers);
 */
+    // disconnect is a pre-defined event
     socket.on('disconnect', () => {
         console.log('client disconnect...', socket.id);
         // handleDisconnect();
     });
 
+    // error is a pre-defined event
     socket.on('error', (err) =>{
         console.log('received error from client:', socket.id);
         console.log(err);
@@ -61,5 +63,5 @@ io.on('connection', (socket) => {
 // our http server listens to port 3000
 server.listen(PORT, (err) => {
     if (err) throw err;
-    console.log('listening on *:3000');
+    console.log('listening on *:' + PORT);
 });
