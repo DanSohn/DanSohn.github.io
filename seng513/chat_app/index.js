@@ -3,7 +3,7 @@ const app = express();
 const server = require('http').createServer(app);
 
 const socket_io = require('socket.io');
-var io = socket_io(server);
+const io = socket_io(server);
 
 
 const PORT = 3000;
@@ -16,6 +16,8 @@ app.get('/', (req, res) => {
 
 //listen on the connection event for incoming sockets
 // if i want to send to everyone except for myself, use socket.broadcast.emit('hi')
+/*
+Basic connection from socket.io tutorial
 io.on('connection', (socket) => {
     console.log('a user connected');
     socket.on('disconnect', () => {
@@ -27,6 +29,34 @@ io.on('connection', (socket) => {
         io.emit('chat message', msg);
     });
 });
+
+ */
+io.on('connection', (socket) => {
+    console.log('a user connected');
+/*
+    socket.on('register', handleRegister);
+
+    socket.on('join', handleJoin);
+
+    socket.on('leave', handleLeave);
+
+    socket.on('message', handleMessage);
+    
+    socket.on('chatrooms', handleGetChatrooms);
+
+    socket.on('availableUsers', handleGetAvailableUsers);
+*/
+    socket.on('disconnect', () => {
+        console.log('client disconnect...', socket.id);
+        // handleDisconnect();
+    });
+
+    socket.on('error', (err) =>{
+        console.log('received error from client:', socket.id);
+        console.log(err);
+    });
+});
+
 
 // our http server listens to port 3000
 server.listen(PORT, (err) => {
