@@ -1,6 +1,12 @@
 $(() => {
     let socket = io();
 
+    // COOKIES
+    let nickname = get_cookies("username");
+    let color = get_cookies("color");
+    socket.emit("color check", color);
+    socket.emit("nickname check", nickname);
+
     // On pressing the send button
     $('form').submit( (e) => {
         e.preventDefault(); //prevents page reloading

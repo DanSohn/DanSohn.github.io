@@ -41,8 +41,31 @@ io.on('connection', (socket) => {
     // sets username when a user connects
     socket.emit('set username', username);
 
-    online_users.push(username);
-    socket.emit('show current users', online_users);
+    // check if the color is set from the previous cookies
+    socket.on("color check", (color)=>{
+        if(color !== ""){
+            socket.user_color = color;
+        }
+    });
+
+    //check if nickname is set from the previous cookies
+    socket.on("nickname check", (nickname)=>{
+        if(nickname!== ""){
+            socket.username = nickname;
+        }else{
+            socket.username = username;
+        }
+
+        // if the user is currently not in the online list, add them
+        if(!online_users.includes(socket.username)){
+            online_users.push(username);
+        }
+
+        // make sure i do this every time i connect and disconnect, and also, every time there is a name change
+        // this is happening every time a user initially connects (and checks for their cookies)
+        socket.emit('show current users', online_users);
+    });
+
 
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
