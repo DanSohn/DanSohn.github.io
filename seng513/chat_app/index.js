@@ -9,7 +9,7 @@ const usernames_module = require(__dirname + '\\resources\\usernames');
 let usernames = usernames_module.usernames;
 
 // convert all usernames to lowercase
-for(let i = 0; i < usernames.length; i ++){
+for (let i = 0; i < usernames.length; i++) {
     usernames[i] = usernames[i].toLowerCase();
 }
 
@@ -17,7 +17,7 @@ for(let i = 0; i < usernames.length; i ++){
 const PORT = 3001;
 // console.log(__dirname + '\\index.html');
 
-let username="";
+let username = "";
 
 let user_color = "#000000";
 
@@ -33,7 +33,6 @@ app.get('/', (req, res) => {
 });
 
 
-
 //listen on the connection event for incoming sockets
 // if i want to send to everyone except for myself, use socket.broadcast.emit('hi')
 //Basic connection from socket.io tutorial
@@ -45,19 +44,19 @@ io.on('connection', (socket) => {
 
 
     // check if the color is set from the previous cookies
-    socket.on("color check", (color)=>{
-        if(color !== ""){
+    socket.on("color check", (color) => {
+        if (color !== "") {
             socket.user_color = color;
-        }else{
+        } else {
             socket.user_color = user_color;
         }
     });
 
     //check if nickname is set from the previous cookies
-    socket.on("nickname check", (nickname)=>{
-        if(nickname!== ""){
+    socket.on("nickname check", (nickname) => {
+        if (nickname !== "") {
             socket.username = nickname;
-        }else{
+        } else {
             // pick a random name from usernames
             username = get_username();
             console.log("Choosing username... : " + username);
@@ -68,7 +67,7 @@ io.on('connection', (socket) => {
         socket.emit('set username', socket.username);
 
         // if the user is currently not in the online list, add them
-        if(!online_users.includes(socket.username)){
+        if (!online_users.includes(socket.username)) {
             online_users.push(socket.username);
         }
 
@@ -82,7 +81,7 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
         // if not an empty string
-        if(msg.trim() !== ""){
+        if (msg.trim() !== "") {
             // bold for users, and ensure using nickname and color properly
             // format of a message should be hh:mm username - msg
             let user_msg = create_user_msg(socket.user_color, socket.username, msg);
@@ -98,17 +97,17 @@ io.on('connection', (socket) => {
     });
 
     // /nick nickname handling, handling a change in nickname!
-    socket.on('name change', (msg) =>{
+    socket.on('name change', (msg) => {
         // change name in online_users. Push nickname to socket user. Send to socket user message that they're name is
         // changed or not changed depending on if the nickname was available
         let new_name;
         let broadcast_msg;
         // to get to this point, i check that it starts with /nick<space>. Therefore I should check there is another letter afterwards
-        if(msg.length >= 7 && msg[6] !== " "){
+        if (msg.length >= 7 && msg[6] !== " ") {
             // remove the old name from online_list
             // i find the index of the user in the list of online users and remove it!
             const index = online_users.indexOf(socket.username);
-            if(index > -1){
+            if (index > -1) {
                 online_users.splice(index, 1);
             }
 
@@ -118,30 +117,30 @@ io.on('connection', (socket) => {
             let regex_test = /^[A-Za-z0-9 ]+$/;
 
             let name_valid = regex_test.test(new_name);
-            if(name_valid){
+            if (name_valid) {
                 // continue on
-            }else{
+                // checks if the new name is an existing username
+                if (online_users.includes(new_name)) {
+                    // we want to broadcast a message and not do the rest of the stuff
+                    broadcast_msg = "<i> Name change unsuccessful. Please choose a unique nickname!</i>";
+                } else {
+                    socket.username = new_name;
+                    broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
+
+                    // updates their name in top left corner
+                    socket.emit('set username', socket.username);
+
+                    online_users.push(socket.username);
+                    io.emit('show current users', online_users);
+                }
+            } else {
                 // invalid name
-            }
+                broadcast_msg = "<i> Name change unsuccessful. Nickname can only consist of characters, numbers and spaces!</i>";
 
-            // checks if the new name is an existing username
-            if(online_users.includes(new_name)){
-                // we want to broadcast a message and not do the rest of the stuff
-                broadcast_msg = "<i> Name change unsuccessful. Please choose a unique nickname!</i>";
-            }else{
-                socket.username = new_name;
-                broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
-
-                // updates their name in top left corner
-                socket.emit('set username', socket.username);
-
-                online_users.push(socket.username);
-                io.emit('show current users', online_users);
             }
 
 
-
-        }else{
+        } else {
             broadcast_msg = "<i> Name change unsuccessful. Make sure to type /nick exampleName.</i>";
         }
         //shows in message box
@@ -152,7 +151,7 @@ io.on('connection', (socket) => {
 
 
     // /nickcolor RGB handling, handling a change in nickname color!!
-    socket.on('color change', (msg) =>{
+    socket.on('color change', (msg) => {
 
     });
 
@@ -164,7 +163,7 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('chat message', msg);
         // i find the index of the user in the list of online users and remove it!
         const index = online_users.indexOf(socket.username);
-        if(index > -1){
+        if (index > -1) {
             online_users.splice(index, 1);
         }
         io.emit('show current users', online_users);
@@ -172,7 +171,7 @@ io.on('connection', (socket) => {
     });
 
     // error is a pre-defined event
-    socket.on('error', (err) =>{
+    socket.on('error', (err) => {
         console.log('received error from client:', socket.id);
         console.log(err);
     });
@@ -181,16 +180,16 @@ io.on('connection', (socket) => {
 });
 
 // looks at the username array and chooses an unused name and returns it
-function get_username(){
+function get_username() {
     let name;
     // do a while loop grabbing names from usernames, while the username is part of the online users
-    do{
+    do {
         // multiple a random number from 0 to 1 with the length of the array and round down to the nearest whole
         let random_num = Math.floor(Math.random() * usernames.length);
 
         name = usernames[random_num];
 
-    }while(online_users.includes(name));
+    } while (online_users.includes(name));
     return name;
 }
 
@@ -198,20 +197,20 @@ function get_username(){
 // https://tecadmin.net/get-current-date-time-javascript/
 // https://stackoverflow.com/questions/8935414/getminutes-0-9-how-to-display-two-digit-numbers
 // using the second link to prettify my text
-function get_time(){
+function get_time() {
     let today = new Date();
-    let hours = ('0'+today.getHours()).slice(-2);
-    let minutes = ('0'+today.getMinutes()).slice(-2);
+    let hours = ('0' + today.getHours()).slice(-2);
+    let minutes = ('0' + today.getMinutes()).slice(-2);
     return hours + ":" + minutes;
 }
 
-function create_user_msg(color, name, msg){
+function create_user_msg(color, name, msg) {
     let time = get_time();
     let message;
     return "<b><p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p></b>";
 }
 
-function create_other_msg(color, name, msg){
+function create_other_msg(color, name, msg) {
     let time = get_time();
     let message;
     return "<p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p>";
