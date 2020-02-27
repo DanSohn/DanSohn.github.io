@@ -133,10 +133,9 @@ io.on('connection', (socket) => {
         } else {
             broadcast_msg = "<i> Name change unsuccessful. Make sure to type /nick exampleName.</i>";
         }
+
         //shows in message box
         socket.emit('chat message', broadcast_msg);
-
-
     });
 
 
@@ -148,17 +147,14 @@ io.on('connection', (socket) => {
 
         // at this point, i checked if(message.length >= 11 && message.substring(1,11) === "nickcolor ") which is true
         if(msg.length >= 12 && msg[11] !== " "){
+            // grabs from after nickcolor<space>
             let hex = msg.substring(11);
 
-            let regex_hex =/^((?:[A-Fa-f0-9]{3}){1,2})$/;
-            let color_valid = regex_hex.test(hex);
-
-            if(color_valid){
+            if(color_valid(hex)){
                 // change color of your name in chat
                 socket.user_color = "#" + hex;
                 socket.emit('set color', socket.user_color);
                 broadcast_msg = "<i> Your color is now #" + hex + "</i>";
-
             }else{
                 // invalid color
                 broadcast_msg = "<i> Color change unsuccessful. Please use a valid RGB format</i>";
@@ -166,6 +162,7 @@ io.on('connection', (socket) => {
         }else{
             broadcast_msg = "<i> Invalid format. Use /nickcolor RRGGBB</i>";
         }
+
         //show to user
         socket.emit('chat message', broadcast_msg);
     });
@@ -248,8 +245,11 @@ function name_valid(name){
     let regex_test = /^[A-Za-z0-9 ]+$/;
     return regex_test.test(name);
 }
-
-
+// function that gets the rest of the message and ensure its a proper hex code
+function color_valid(hex){
+    let regex_hex =/^((?:[A-Fa-f0-9]{3}){1,2})$/;
+    return regex_hex.test(hex);
+}
 function remove_user(name){
     // i find the index of the user in the list of online users and remove it!
     const index = online_users.indexOf(name);
