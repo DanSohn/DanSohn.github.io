@@ -95,6 +95,15 @@ io.on('connection', (socket) => {
 
     // disconnect is a pre-defined event
     socket.on('disconnect', () => {
+        // On disconnect, I send a little message saying im disconnecting
+        let msg = "<i>" + socket.username + " has disconnected. :(</i>";
+        socket.broadcast.emit('chat message', msg);
+        // i find the index of the user in the list of online users and remove it!
+        const index = online_users.indexOf(socket.username);
+        if(index > -1){
+            online_users.splice(index, 1);
+        }
+        io.emit('show current users', online_users);
         console.log('client disconnect...', socket.id);
     });
 
