@@ -115,9 +115,17 @@ io.on('connection', (socket) => {
             new_name = msg.substring(6).toLowerCase();
             console.log(new_name);
 
-            // DO A CHECK HERE IF THE NEW NAME IS AN EXISTING NAME
+            let regex_test = /^[A-Za-z0-9 ]+$/;
+
+            let name_valid = regex_test.test(new_name);
+            if(name_valid){
+                // continue on
+            }else{
+                // invalid name
+            }
+
+            // checks if the new name is an existing username
             if(online_users.includes(new_name)){
-                // HANDLE CAPITALS
                 // we want to broadcast a message and not do the rest of the stuff
                 broadcast_msg = "<i> Name change unsuccessful. Please choose a unique nickname!</i>";
             }else{
