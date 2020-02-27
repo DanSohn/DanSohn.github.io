@@ -28,6 +28,8 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '\\client\\index.html');
 });
 
+
+
 //listen on the connection event for incoming sockets
 // if i want to send to everyone except for myself, use socket.broadcast.emit('hi')
 //Basic connection from socket.io tutorial
@@ -45,6 +47,8 @@ io.on('connection', (socket) => {
     socket.on("color check", (color)=>{
         if(color !== ""){
             socket.user_color = color;
+        }else{
+            socket.user_color = user_color;
         }
     });
 
@@ -125,13 +129,13 @@ function get_time(){
 function create_user_msg(color, name, msg){
     let time = get_time();
     let message;
-    return message = time + "<b><p style=color:" + color + ">" + name + ":</p>" + msg + "</b>";
+    return message = "<b><p style=color:" + color + ">" + time + name + ":" + msg + "</p></b>";
 }
 
 function create_other_msg(color, name, msg){
     let time = get_time();
     let message;
-    return message = time + "<p style=color:" + color + ">" + name + ":</p>" + msg;
+    return message ="<p style=color:" + color + ">" + time + name + ":" + msg + "</p>";
 }
 
 // our http server listens to port 3000
