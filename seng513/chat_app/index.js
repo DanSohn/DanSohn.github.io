@@ -30,7 +30,6 @@ io.on('connection', (socket) => {
     // disconnect is a pre-defined event
     socket.on('disconnect', () => {
         console.log('client disconnect...', socket.id);
-        // handleDisconnect();
     });
 
     // error is a pre-defined event

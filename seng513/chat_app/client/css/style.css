@@ -102,9 +102,9 @@ form button {
 
 #messages {
     height: 86vh;
+    overflow: auto;
     display: -webkit-flex;
     -webkit-flex-direction: column-reverse;
-    display: flex;
     flex-direction: column-reverse;
     word-wrap: break-word;
     list-style-type: none;
