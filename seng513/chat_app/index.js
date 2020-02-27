@@ -8,6 +8,10 @@ const io = socket_io(server);
 const usernames_module = require(__dirname + '\\resources\\usernames');
 let usernames = usernames_module.usernames;
 
+// convert all usernames to lowercase
+for(let i = 0; i < usernames.length; i ++){
+    usernames[i] = usernames[i].toLowerCase();
+}
 
 // console.log(usernames);
 const PORT = 3001;
@@ -108,11 +112,12 @@ io.on('connection', (socket) => {
                 online_users.splice(index, 1);
             }
 
-            new_name = msg.substring(6);
+            new_name = msg.substring(6).toLowerCase();
             console.log(new_name);
 
             // DO A CHECK HERE IF THE NEW NAME IS AN EXISTING NAME
             if(online_users.includes(new_name)){
+                // HANDLE CAPITALS
                 // we want to broadcast a message and not do the rest of the stuff
                 broadcast_msg = "<i> Name change unsuccessful. Please choose a unique nickname!</i>";
             }else{
