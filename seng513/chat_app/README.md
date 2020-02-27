@@ -4,6 +4,8 @@
 I am implementing a web application for online chatting, that can handle over 10+ users. Have not tested with more devices. 
 Uses cookies to store state (username, and preferred color)
 
+Jung Hyun Sohn
+30017825
 ## To run:
 ```
 git clone https://github.com/DanSohn/DanSohn.github.io.git
