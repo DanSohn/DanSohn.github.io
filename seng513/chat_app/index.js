@@ -110,6 +110,10 @@ io.on('connection', (socket) => {
 
             new_name = msg.substring(6);
             console.log(new_name);
+
+            // DO A CHECK HERE IF THE NEW NAME IS AN EXISTING NAME
+
+            
             socket.username = new_name;
             broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
 
