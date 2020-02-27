@@ -93,6 +93,18 @@ io.on('connection', (socket) => {
 
     });
 
+    // /nick nickname handling, handling a change in nickname!
+    socket.on('name change', (msg) =>{
+
+    });
+
+
+    // /nickcolor RGB handling, handling a change in nickname color!!
+    socket.on('color change', (msg) =>{
+
+    });
+
+
     // disconnect is a pre-defined event
     socket.on('disconnect', () => {
         // On disconnect, I send a little message saying im disconnecting
