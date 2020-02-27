@@ -38,11 +38,25 @@ io.on('connection', (socket) => {
     username = get_username();
     console.log("Choosing username... : " + username);
 
+    socket.emit('initial username', username);
+    
 
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
-        socket.emit('chat message', msg);
-        socket.broadcast.emit('chat message', msg);
+        // if not an empty string
+        if(msg.trim() !== ""){
+            // bold for users, and ensure using nickname and color properly
+            // format of a message should be hh:mm username - msg
+            let user_msg = create_user_msg(socket.user_color, socket.username, msg);
+            let other_msg = create_other_msg(socket.user_color, socket.username, msg);
+            // push to current users
+            socket.emit('chat message', user_msg);
+            socket.broadcast.emit('chat message', other_msg);
+
+            //for the future generations, keep tracking of the chat
+            chat_history.push(other_msg);
+        }
+
     });
 
     // disconnect is a pre-defined event
@@ -59,7 +73,7 @@ io.on('connection', (socket) => {
 
 });
 
-
+// looks at the username array and chooses an unused name and returns it
 function get_username(){
     let name;
     // do a while loop grabbing names from usernames, while the username is part of the online users
@@ -72,6 +86,26 @@ function get_username(){
 
     }while(online_users.includes(name));
     return name;
+}
+
+// finds the current time in hh:mm format
+// https://tecadmin.net/get-current-date-time-javascript/
+function get_time(){
+    let today = new Date();
+    let time;
+    return time = today.getHours() + ":" + today.getMinutes();
+}
+
+function create_user_msg(color, name, msg){
+    let time = get_time();
+    let message;
+    return message = time + "<b><p style=color:" + color + ">" + name + ":</p>" + msg + "</b>";
+}
+
+function create_other_msg(color, name, msg){
+    let time = get_time();
+    let message;
+    return message = time + "<p style=color:" + color + ">" + name + ":</p>" + msg;
 }
 
 // our http server listens to port 3000
