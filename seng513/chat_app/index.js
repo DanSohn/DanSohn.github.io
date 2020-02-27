@@ -90,8 +90,9 @@ io.on('connection', (socket) => {
         if (msg.trim() !== "") {
             // bold for users, and ensure using nickname and color properly
             // format of a message should be hh:mm username - msg
+            console.log("message color: " + socket.user_color + " message name: " + socket.username);
             let user_msg = create_user_msg(socket.user_color, socket.username, msg);
-            let other_msg = create_other_msg(socket.user_color, socket.username, msg);
+            let other_msg = create_other_msg(socket.username, msg);
             // push to current users
             socket.emit('chat message', user_msg);
             socket.broadcast.emit('chat message', other_msg);
@@ -159,6 +160,9 @@ io.on('connection', (socket) => {
     // /nickcolor RGB handling, handling a change in nickname color!!
     // src of regex https://stackoverflow.com/questions/32673760/how-can-i-know-if-a-given-string-is-hex-rgb-rgba-or-hsl-color-using-javascript
     socket.on('color change', (msg) => {
+        console.log("Changing color of chat");
+        let broadcast_msg;
+
         // at this point, i checked if(message.length >= 11 && message.substring(1,11) === "nickcolor ") which is true
         if(msg.length >= 12 && msg[11] !== " "){
             let hex = msg.substring(11);
@@ -168,8 +172,21 @@ io.on('connection', (socket) => {
 
             if(color_valid){
                 // change color of your name in chat
+                socket.user_color = "#" + hex;
+                socket.emit('set color', socket.user_color);
+                broadcast_msg = "<i> Your color is now #" + hex + "</i>";
+
+            }else{
+                // invalid color
+                broadcast_msg = "<i> Color change unsuccessful. Please use a valid RGB format</i>";
             }
+        }else{
+            broadcast_msg = "<i> Invalid format. Use /nickcolor RRGGBB</i>";
+
         }
+
+        //show to user
+        socket.emit('chat message', broadcast_msg);
 
 
 
@@ -230,10 +247,10 @@ function create_user_msg(color, name, msg) {
     return "<b><p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p></b>";
 }
 
-function create_other_msg(color, name, msg) {
+function create_other_msg(name, msg) {
     let time = get_time();
     let message;
-    return "<p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p>";
+    return "<p>" + time + " " + name + ": " + msg + "</p>";
 }
 
 // our http server listens to port 3000
