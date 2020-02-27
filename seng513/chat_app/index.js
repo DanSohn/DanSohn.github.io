@@ -98,16 +98,13 @@ io.on('connection', (socket) => {
     socket.on('name change', (msg) => {
         // change name in online_users. Push nickname to socket user. Send to socket user message that they're name is
         // changed or not changed depending on if the nickname was available
+
         let new_name;
         let broadcast_msg;
         // to get to this point, i check that it starts with /nick<space>. Therefore I should check there is another letter afterwards
-        if (msg.length >= 7 && msg[6] !== " ") {
+        if (msg.length >= 7 && msg[5] === " " && msg[6] !== " ") {
             // remove the old name from online_list
-            // i find the index of the user in the list of online users and remove it!
-            const index = online_users.indexOf(socket.username);
-            if (index > -1) {
-                online_users.splice(index, 1);
-            }
+            remove_user(socket.username);
 
             new_name = msg.substring(6).toLowerCase();
             console.log(new_name);
@@ -178,22 +175,21 @@ io.on('connection', (socket) => {
         socket.emit('chat message', broadcast_msg);
     });
 
+    // occurs when a user puts in a / command thats doesn't start with nick
     socket.on('bad command', () =>{
         let broadcast_msg = "<i> Invalid syntax. The two commands available are /nick and /nickcolor.</i>";
         socket.emit('chat message', broadcast_msg);
     });
 
-    
+
     // disconnect is a pre-defined event
     socket.on('disconnect', () => {
         // On disconnect, I send a little message saying im disconnecting
         let msg = "<i>" + socket.username + " has disconnected. :(</i>";
         socket.broadcast.emit('chat message', msg);
-        // i find the index of the user in the list of online users and remove it!
-        const index = online_users.indexOf(socket.username);
-        if (index > -1) {
-            online_users.splice(index, 1);
-        }
+        //remove user from online users
+        remove_user(socket.username);
+
         io.emit('show current users', online_users);
         console.log('client disconnect...', socket.id);
     });
@@ -252,6 +248,13 @@ function name_free(nickname){
 
 }
 
+function remove_user(name){
+    // i find the index of the user in the list of online users and remove it!
+    const index = online_users.indexOf(name);
+    if (index > -1) {
+        online_users.splice(index, 1);
+    }
+}
 // our http server listens to port 3000
 server.listen(PORT, (err) => {
     if (err) throw err;
