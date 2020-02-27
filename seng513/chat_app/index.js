@@ -1,26 +1,21 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-
 const socket_io = require('socket.io');
 const io = socket_io(server);
 
 const usernames_module = require(__dirname + '\\resources\\usernames');
 let usernames = usernames_module.usernames;
-
 // convert all usernames to lowercase
 for (let i = 0; i < usernames.length; i++) {
     usernames[i] = usernames[i].toLowerCase();
 }
 
-// console.log(usernames);
 const PORT = 3001;
-// console.log(__dirname + '\\index.html');
+
 
 let username = "";
-
 let user_color = "#000000";
-
 let online_users = [];
 let chat_history = [];
 
@@ -48,38 +43,34 @@ io.on('connection', (socket) => {
         if (color !== "") {
             socket.user_color = color;
         } else {
+            // sets the color to black
             socket.user_color = user_color;
         }
     });
 
+
     //check if nickname is set from the previous cookies
     socket.on("nickname check", (nickname) => {
-        if (nickname !== "") {
-            // if someone is currently using the nickname
-            if(online_users.includes(nickname)){
-                // set a generated username
-                socket.username = get_username();
-            }else{
-                socket.username = nickname;
-            }
-        } else {
-            // pick a random name from usernames
-            username = get_username();
-            console.log("Choosing username... : " + username);
-
-            socket.username = username;
-            // sets username when a user connects
+        console.log("Current online users: " + online_users);
+        console.log("Previous nickname: " + nickname);
+        // if there exists a nickname from the cookies and someone is not using it, I will set it to given nickname
+        // else, I generate a random nickaname
+        socket.username =  (name_free(nickname)) ? nickname : get_username();
+        /*
+        if (nickname !== "" && !online_users.includes(nickname)) {
+            socket.username = nickname;
+        } else{
+            socket.username = get_username();
         }
+         */
+
         socket.emit('set username', socket.username);
 
         // if the user is currently not in the online list, add them
         if (!online_users.includes(socket.username)) {
             online_users.push(socket.username);
         }
-
-        // make sure i do this every time i connect and disconnect, and also, every time there is a name change
-        // this is happening every time a user initially connects (and checks for their cookies)
-        // THIS USED TO BE SOCKET.EMIT, BUT THATS WRONG. SHOULD BE IO.EMIT TO EMIT TO ALL CONNECTED SOCKETS
+        // sends to all connected sockets the updated online users list
         io.emit('show current users', online_users);
     });
 
@@ -90,7 +81,7 @@ io.on('connection', (socket) => {
         if (msg.trim() !== "") {
             // bold for users, and ensure using nickname and color properly
             // format of a message should be hh:mm username - msg
-            console.log("message color: " + socket.user_color + " message name: " + socket.username);
+            //console.log("message color: " + socket.user_color + " message name: " + socket.username);
             let user_msg = create_user_msg(socket.user_color, socket.username, msg);
             let other_msg = create_other_msg(socket.username, msg);
             // push to current users
@@ -182,14 +173,9 @@ io.on('connection', (socket) => {
             }
         }else{
             broadcast_msg = "<i> Invalid format. Use /nickcolor RRGGBB</i>";
-
         }
-
         //show to user
         socket.emit('chat message', broadcast_msg);
-
-
-
     });
 
 
@@ -251,6 +237,14 @@ function create_other_msg(name, msg) {
     let time = get_time();
     let message;
     return "<p>" + time + " " + name + ": " + msg + "</p>";
+}
+
+// function checks the given nickname if it is valid and if there is no one with it
+function name_free(nickname){
+    console.log("Checking nickname...");
+    console.log(nickname);
+    return nickname !== "" && !online_users.includes(nickname);
+
 }
 
 // our http server listens to port 3000
