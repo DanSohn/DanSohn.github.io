@@ -10,10 +10,10 @@ const PORT = 3001;
 console.log(__dirname + '\\index.html');
 
 // this is for static files like my css file, to enable it to work properly
-app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + '/client'));
 // route handler that's called when we hit our website home
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '\\index.html');
+    res.sendFile(__dirname + '\\client\\index.html');
 });
 
 //listen on the connection event for incoming sockets

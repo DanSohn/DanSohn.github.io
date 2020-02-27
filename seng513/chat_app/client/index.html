@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Jung Hyun Sohn">
+    <meta name="description" content="Daniel Sohn Chatbox App">
+    <meta name="keywords"
+          content="Daniel Sohn Jung Hyun Website Portfolio HTML CSS University of Calgary Chat Box App Software Engineer"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Dan's Chat App</title>
+    <link href= "css/style.css" rel="stylesheet">
+    <script src="../node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="client.js"></script>
+
+</head>
+<body>
+<h1 id = "title">Dan's Chat Application</h1>
+<p id = "client-name">Your name is:</p>
+
+<p id = "online-users">Online Users:</p>
+
+<div id="messageBox">
+    <ul id="messages"></ul>
+</div>
+
+<form id="input-box" action="">
+    <input id="m" autocomplete="off" /><button>Send</button>
+</form>
+</body>
+</html>
