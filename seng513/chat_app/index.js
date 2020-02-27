@@ -120,22 +120,25 @@ function get_username(){
 
 // finds the current time in hh:mm format
 // https://tecadmin.net/get-current-date-time-javascript/
+// https://stackoverflow.com/questions/8935414/getminutes-0-9-how-to-display-two-digit-numbers
+// using the second link to prettify my text
 function get_time(){
     let today = new Date();
-    let time;
-    return time = today.getHours() + ":" + today.getMinutes();
+    let hours = ('0'+today.getHours()).slice(-2);
+    let minutes = ('0'+today.getMinutes()).slice(-2);
+    return hours + ":" + minutes;
 }
 
 function create_user_msg(color, name, msg){
     let time = get_time();
     let message;
-    return message = "<b><p style=color:" + color + ">" + time + name + ":" + msg + "</p></b>";
+    return message = "<b><p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p></b>";
 }
 
 function create_other_msg(color, name, msg){
     let time = get_time();
     let message;
-    return message ="<p style=color:" + color + ">" + time + name + ":" + msg + "</p>";
+    return message ="<p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p>";
 }
 
 // our http server listens to port 3000
