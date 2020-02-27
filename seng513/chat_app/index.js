@@ -35,6 +35,9 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     // pick a random name from usernames
+    username = get_username();
+    console.log("Choosing username... : " + username);
+
 
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
@@ -55,6 +58,21 @@ io.on('connection', (socket) => {
 
 
 });
+
+
+function get_username(){
+    let name;
+    // do a while loop grabbing names from usernames, while the username is part of the online users
+    do{
+        // multiple a random number from 0 to 1 with the length of the array and round down to the nearest whole
+        let random_num = Math.floor(Math.random() * usernames.length);
+        console.log(random_num);
+
+        name = usernames[random_num];
+
+    }while(online_users.includes(name));
+    return name;
+}
 
 // our http server listens to port 3000
 server.listen(PORT, (err) => {
