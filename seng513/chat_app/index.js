@@ -95,6 +95,36 @@ io.on('connection', (socket) => {
 
     // /nick nickname handling, handling a change in nickname!
     socket.on('name change', (msg) =>{
+        // change name in online_users. Push nickname to socket user. Send to socket user message that they're name is
+        // changed or not changed depending on if the nickname was available
+        let new_name;
+        let broadcast_msg;
+        // to get to this point, i check that it starts with /nick<space>. Therefore I should check there is another letter afterwards
+        if(msg.length >= 7 && msg[6] !== " "){
+            // remove the old name from online_list
+            // i find the index of the user in the list of online users and remove it!
+            const index = online_users.indexOf(socket.username);
+            if(index > -1){
+                online_users.splice(index, 1);
+            }
+
+            new_name = msg.substring(6);
+            console.log(new_name);
+            socket.username = new_name;
+            broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
+
+            // updates their name in top left corner
+            socket.emit('set username', socket.username);
+
+            online_users.push(socket.username);
+            io.emit('show current users', online_users);
+
+        }else{
+            broadcast_msg = "<i> Name change unsuccessful. Make sure to type /nick exampleName.</i>";
+        }
+        //shows in message box
+        socket.emit('chat message', broadcast_msg);
+
 
     });
 
