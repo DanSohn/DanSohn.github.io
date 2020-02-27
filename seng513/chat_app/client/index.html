@@ -10,24 +10,39 @@
 
 
     <title>Dan's Chat App</title>
-    <link href= "css/style.css" rel="stylesheet">
-    <script src="../node_modules/socket.io-client/dist/socket.io.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="client.js"></script>
 
 </head>
 <body>
-<h1 id = "title">Dan's Chat Application</h1>
-<p id = "client-name">Your name is:</p>
+<div id="container">
+    <h1 id="title">Choco-Message</h1>
+    <div id="left">
+        <div id="client-box">
+            <p id="name-description">
+                Your name is:
+            </p>
+            <p id="client-name">Daniel Sohn</p>
+        </div>
+        <div id="online-users-box">
+            <p id="online-headline">Online Users:</p>
+            <p id="online-users">Daniel</p>
 
-<p id = "online-users">Online Users:</p>
+        </div>
 
-<div id="messageBox">
-    <ul id="messages"></ul>
+    </div>
+    <div id="right">
+        <div id="messageBox">
+            <ul id="messages"></ul>
+        </div>
+
+        <form id="input-box" action="">
+            <input id="m" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+    </div>
 </div>
-
-<form id="input-box" action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
-</form>
 </body>
 </html>
