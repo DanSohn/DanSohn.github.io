@@ -5,9 +5,21 @@ const server = require('http').createServer(app);
 const socket_io = require('socket.io');
 const io = socket_io(server);
 
+const usernames_module = require(__dirname + '\\resources\\usernames');
+let usernames = usernames_module.usernames;
 
+
+// console.log(usernames);
 const PORT = 3001;
-console.log(__dirname + '\\index.html');
+// console.log(__dirname + '\\index.html');
+
+let username="";
+
+let user_color = "#000000";
+
+let online_users = [];
+let chat_history = [];
+
 
 // this is for static files like my css file, to enable it to work properly
 app.use(express.static(__dirname + '/client'));
@@ -22,9 +34,12 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
+    // pick a random name from usernames
+
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
         socket.emit('chat message', msg);
+        socket.broadcast.emit('chat message', msg);
     });
 
     // disconnect is a pre-defined event
