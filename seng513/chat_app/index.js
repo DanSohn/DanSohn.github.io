@@ -36,12 +36,9 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
-    // pick a random name from usernames
-    username = get_username();
-    console.log("Choosing username... : " + username);
+    // populate chat box with previous messages
+    socket.emit('chat history', chat_history);
 
-    // sets username when a user connects
-    socket.emit('set username', username);
 
     // check if the color is set from the previous cookies
     socket.on("color check", (color)=>{
@@ -57,17 +54,24 @@ io.on('connection', (socket) => {
         if(nickname!== ""){
             socket.username = nickname;
         }else{
+            // pick a random name from usernames
+            username = get_username();
+            console.log("Choosing username... : " + username);
+
             socket.username = username;
+            // sets username when a user connects
         }
+        socket.emit('set username', socket.username);
 
         // if the user is currently not in the online list, add them
         if(!online_users.includes(socket.username)){
-            online_users.push(username);
+            online_users.push(socket.username);
         }
 
         // make sure i do this every time i connect and disconnect, and also, every time there is a name change
         // this is happening every time a user initially connects (and checks for their cookies)
-        socket.emit('show current users', online_users);
+        // THIS USED TO BE SOCKET.EMIT, BUT THATS WRONG. SHOULD BE IO.EMIT TO EMIT TO ALL CONNECTED SOCKETS
+        io.emit('show current users', online_users);
     });
 
 
@@ -110,7 +114,6 @@ function get_username(){
     do{
         // multiple a random number from 0 to 1 with the length of the array and round down to the nearest whole
         let random_num = Math.floor(Math.random() * usernames.length);
-        console.log(random_num);
 
         name = usernames[random_num];
 
