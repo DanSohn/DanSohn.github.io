@@ -28,7 +28,7 @@
 #name-description {
     padding-top: 5px;
 }
-#client-name{
+#client-name {
     font-size: 40px;
 
     /* vertical align */
@@ -38,13 +38,16 @@
     transform: translate(-50%, -50%);
 }
 
-#online-headline{
+#online-users-box {
+    background: #f1f9fc;
+}
+#online-headline {
     padding-top: 10px;
     text-align: center;
     font-size: 20px;
 }
 
-#online-users{
+#online-users {
     width:100%;
     height: 77vh;
     display: -webkit-flex;
@@ -61,9 +64,10 @@
     display: inline-block;
     float: right;
     width: 75%;
-
 }
+
 form {
+    height: 6vh;
     background: #000;
     padding: 3px;
     position: fixed;
@@ -72,29 +76,35 @@ form {
 }
 
 form input {
+    height: 100%;
     border: 0;
     padding: 10px;
-    width: 90%;
+    width: 64%;
     margin-right: .5%;
 }
 
 form button {
-    width: 9%;
+    height: 100%;
+    width: 10%;
     background: rgb(130, 224, 255);
     border: none;
     padding: 10px;
 }
 
 #messages {
+    background: greenyellow;
+    height: 86vh;
+    display: -webkit-flex;
+    -webkit-flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column-reverse;
+    word-wrap: break-word;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
 #messages li {
+    font-size: 18px;
     padding: 5px 10px;
-}
-
-#messages li:nth-child(odd) {
-    background: #eee;
 }
