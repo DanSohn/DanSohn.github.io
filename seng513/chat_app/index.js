@@ -55,7 +55,13 @@ io.on('connection', (socket) => {
     //check if nickname is set from the previous cookies
     socket.on("nickname check", (nickname) => {
         if (nickname !== "") {
-            socket.username = nickname;
+            // if someone is currently using the nickname
+            if(online_users.includes(nickname)){
+                // set a generated username
+                socket.username = get_username();
+            }else{
+                socket.username = nickname;
+            }
         } else {
             // pick a random name from usernames
             username = get_username();
@@ -151,7 +157,21 @@ io.on('connection', (socket) => {
 
 
     // /nickcolor RGB handling, handling a change in nickname color!!
+    // src of regex https://stackoverflow.com/questions/32673760/how-can-i-know-if-a-given-string-is-hex-rgb-rgba-or-hsl-color-using-javascript
     socket.on('color change', (msg) => {
+        // at this point, i checked if(message.length >= 11 && message.substring(1,11) === "nickcolor ") which is true
+        if(msg.length >= 12 && msg[11] !== " "){
+            let hex = msg.substring(11);
+
+            let regex_hex =/^((?:[A-Fa-f0-9]{3}){1,2})$/;
+            let color_valid = regex_hex.test(hex);
+
+            if(color_valid){
+                // change color of your name in chat
+            }
+        }
+
+
 
     });
 
