@@ -112,16 +112,21 @@ io.on('connection', (socket) => {
             console.log(new_name);
 
             // DO A CHECK HERE IF THE NEW NAME IS AN EXISTING NAME
+            if(online_users.includes(new_name)){
+                // we want to broadcast a message and not do the rest of the stuff
+                broadcast_msg = "<i> Name change unsuccessful. Please choose a unique nickname!</i>";
+            }else{
+                socket.username = new_name;
+                broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
 
-            
-            socket.username = new_name;
-            broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
+                // updates their name in top left corner
+                socket.emit('set username', socket.username);
 
-            // updates their name in top left corner
-            socket.emit('set username', socket.username);
+                online_users.push(socket.username);
+                io.emit('show current users', online_users);
+            }
 
-            online_users.push(socket.username);
-            io.emit('show current users', online_users);
+
 
         }else{
             broadcast_msg = "<i> Name change unsuccessful. Make sure to type /nick exampleName.</i>";
