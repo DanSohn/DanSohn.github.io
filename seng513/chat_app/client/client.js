@@ -18,20 +18,18 @@ $(() => {
         // check if its a /nick, /nickcolor, /something, or just regular chat command,
         if(message.substring(0,1) === "/"){
             // check if nick, nickcolor, or not at all
-            if(message.length >= 6 && message.substring(1,5) === "nick"){
+            if(message.length >= 5 && message.substring(1,5) === "nick"){
                 console.log("finding info:" +  message + ", " +  message.length);
-                if(message.length >= 11 && message.substring(1,11) === "nickcolor "){
-                    console.log("Changing color in client");
+                if(message.length >= 10 && message.substring(1,10) === "nickcolor"){
+                    console.log("In Client - going to color change");
                     socket.emit("color change", message);
-                }else if (message.substring(5,6) === " "){
-                    // its /nick something
-                    console.log("Changing nickname in client");
-
+                }else{
+                    console.log("In Client = going to name change");
                     socket.emit("name change", message);
                 }
             }else{
                 // has a / something, thats not nick or nickcolor
-                socket.emit("incorrect command", message);
+                socket.emit("bad command");
             }
         }else{
             // REGULAR MESSAGE

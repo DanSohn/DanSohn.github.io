@@ -178,7 +178,12 @@ io.on('connection', (socket) => {
         socket.emit('chat message', broadcast_msg);
     });
 
+    socket.on('bad command', () =>{
+        let broadcast_msg = "<i> Invalid syntax. The two commands available are /nick and /nickcolor.</i>";
+        socket.emit('chat message', broadcast_msg);
+    });
 
+    
     // disconnect is a pre-defined event
     socket.on('disconnect', () => {
         // On disconnect, I send a little message saying im disconnecting
