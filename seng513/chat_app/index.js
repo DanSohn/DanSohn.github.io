@@ -109,10 +109,7 @@ io.on('connection', (socket) => {
             new_name = msg.substring(6).toLowerCase();
             console.log(new_name);
 
-            let regex_test = /^[A-Za-z0-9 ]+$/;
-
-            let name_valid = regex_test.test(new_name);
-            if (name_valid) {
+            if (name_valid(new_name)) {
                 // continue on
                 // checks if the new name is an existing username
                 if (online_users.includes(new_name)) {
@@ -120,21 +117,19 @@ io.on('connection', (socket) => {
                     broadcast_msg = "<i> Name change unsuccessful. Please choose a unique nickname!</i>";
                 } else {
                     socket.username = new_name;
-                    broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
-
                     // updates their name in top left corner
                     socket.emit('set username', socket.username);
-
+                    // add user to online users and updates list for everyone
                     online_users.push(socket.username);
                     io.emit('show current users', online_users);
+
+                    broadcast_msg = "<i> You changed your name to " + socket.username + ".</i>";
+
                 }
             } else {
                 // invalid name
                 broadcast_msg = "<i> Name change unsuccessful. Nickname can only consist of characters, numbers and spaces!</i>";
-
             }
-
-
         } else {
             broadcast_msg = "<i> Name change unsuccessful. Make sure to type /nick exampleName.</i>";
         }
@@ -247,6 +242,13 @@ function name_free(nickname){
     return nickname !== "" && !online_users.includes(nickname);
 
 }
+
+// function that gets a name and ensures that its made of only spaces, charactesr and letters
+function name_valid(name){
+    let regex_test = /^[A-Za-z0-9 ]+$/;
+    return regex_test.test(name);
+}
+
 
 function remove_user(name){
     // i find the index of the user in the list of online users and remove it!
