@@ -132,13 +132,13 @@ function get_time(){
 function create_user_msg(color, name, msg){
     let time = get_time();
     let message;
-    return message = "<b><p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p></b>";
+    return "<b><p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p></b>";
 }
 
 function create_other_msg(color, name, msg){
     let time = get_time();
     let message;
-    return message ="<p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p>";
+    return "<p style=color:" + color + ">" + time + " " + name + ": " + msg + "</p>";
 }
 
 // our http server listens to port 3000
