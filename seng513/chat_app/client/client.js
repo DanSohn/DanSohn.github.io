@@ -33,6 +33,21 @@ $(() => {
     });
 
     socket.on('chat message', (msg) => {
+        console.log('chat message');
         $('#messages').prepend($('<li>').html(msg));
+    });
+
+    socket.on('set username', (username) => {
+        console.log("setting username to: " + username);
+        $('#client-name').text(username);
+    });
+
+    socket.on('show current users', (user_list) => {
+        // get rid of all current users, and then place the list in
+        $('#online-users').empty();
+
+        $.each(user_list, (index) =>{
+           $('#online-users').append($('<li>' + user_list[index] + '</li>'));
+        });
     });
 });

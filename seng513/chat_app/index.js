@@ -38,8 +38,11 @@ io.on('connection', (socket) => {
     username = get_username();
     console.log("Choosing username... : " + username);
 
-    socket.emit('initial username', username);
-    
+    // sets username when a user connects
+    socket.emit('set username', username);
+
+    online_users.push(username);
+    socket.emit('show current users', online_users);
 
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
