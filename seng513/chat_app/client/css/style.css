@@ -117,3 +117,25 @@ form button {
     font-size: 18px;
     padding: 5px 10px;
 }
+
+@media screen and (max-width: 1000px) {
+    #client-name {
+        font-size: x-large;
+    }
+
+    #online-users {
+        height: 74vh;
+        font-size: medium;
+    }
+    form input {
+        width: 95%;
+    }
+
+    form button {
+        height: 0;
+        width: 0;
+        border: none;
+        padding: 0;
+        font-size: 0;
+    }
+}
