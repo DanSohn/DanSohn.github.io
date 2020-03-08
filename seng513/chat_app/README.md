@@ -1,7 +1,7 @@
 # My Chat App
 ## Utilizing HTML/CSS, JQuery, nodejs and Socket.io
 
-I am implementing a web application for online chatting, that can handle over 10+ users. Have not tested with more devices. 
+I am implementing a web application for online chatting, that can handle over 10+ users. Have tested with three devices and 8+ users at a time. 
 Uses cookies to store state (username, and preferred color)
 
 Jung Hyun Sohn
@@ -21,7 +21,7 @@ node index
 ```
 
 go to browser:
-localhost:3001
+localhost:3010
 
 enjoy probably talking to yourself in incognito and other browsers! Only supports local network.
 To run on different devices:

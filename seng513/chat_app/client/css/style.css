@@ -100,7 +100,7 @@ form button {
     border: none;
     padding: 10px;
 }
-
+/*
 #messages {
     height: 86vh;
     overflow: auto;
@@ -112,9 +112,25 @@ form button {
     margin: 0;
     padding: 0;
 }
+*/
+/* Mozilla doesn't work, so trying a different solution with flex only: */
+#messages{
+    font-size: 18px;
+
+    height: 86vh;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    list-style-type: none;
+}
+
+#messages li:first-child {
+    margin-top: auto;
+}
 
 #messages li {
-    font-size: 18px;
     padding: 5px 10px;
 }
 
