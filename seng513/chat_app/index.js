@@ -1,3 +1,10 @@
+/*
+TODO:
+even default names should be nicknames, added to cookies
+enable scrolling for firefox
+ */
+
+
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
@@ -11,7 +18,7 @@ for (let i = 0; i < usernames.length; i++) {
     usernames[i] = usernames[i].toLowerCase();
 }
 
-const PORT = 3001;
+const PORT = 3010;
 
 
 let username = "";
