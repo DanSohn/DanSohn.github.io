@@ -6,6 +6,7 @@ Uses cookies to store state (username, and preferred color)
 
 Jung Hyun Sohn
 30017825
+https://github.com/DanSohn/DanSohn.github.io/tree/master/seng513/chat_app
 ## To run:
 ```
 git clone https://github.com/DanSohn/DanSohn.github.io.git
