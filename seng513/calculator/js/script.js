@@ -100,7 +100,7 @@ function input_operator(op){
 
     console.log("Checking prev val and curr display ---", calculator.prev_val, calculator.curr_display);
     // Case where I previously did a calculation, and want to continue operating on the answer
-    if((calculator.prev_val !== "") && (calculator.curr_display === "")){
+    if((calculator.prev_val !== "") && (calculator.curr_display === "0")){
         console.log("Continuing previous calculation");
         calculator.curr_display = calculator.prev_val + op;
     }else{
@@ -152,12 +152,12 @@ function input_equal(){
     }
 
     calculator.curr_display = res;
+    calculator.prev_val = calculator.curr_display;
 
     update_display();
 
     calculator.curr_display = "0";
     calculator.curr_num = "0";
-    calculator.prev_val = calculator.curr_display;
     calculator.f = true;
 }
 
