@@ -317,11 +317,9 @@ img.icon:hover {
     padding-bottom: 32px;
     font-size: 12px;
     line-height: 20px;
+    margin: 0 auto;
 }
 
-#footer .inner {
-    margin: 0 5%;
-}
 
 .right {
     float: right;
