@@ -1,5 +1,51 @@
+body {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Martel', serif;
+    line-height: 20px;
+    color: #333333;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+    /*background-color: #f4f4f4;*/
+    background-color: green;
+}
+
+.inner {
+    background: grey;
+    max-width: 1600px;
+    padding-top: 150px;
+    padding-bottom: 70px;
+    height: auto;
+    margin: 0 auto;
+    /* same height as top, since nav bar is 80px currently */
+
+}
+
+.inner header h1 {
+    font-size: 50px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.description {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.description p {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
 rect.bg {
     width: 100%;
     height: 100%;
     fill: #afdbe3;
 }
+
