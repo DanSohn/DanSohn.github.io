@@ -49,7 +49,7 @@ function makechart(vis_num) {
             let genre = data.map(d => d.genres);
             //let rating = data.map(d => d.rating);
             let prices = data.map(d => d.price);
-            var max = Math.max.apply(Math, prices);
+            let max = Math.max.apply(Math, prices);
 
             let xscale = d3
                 .scaleBand(genre, [0, innerWidth])
@@ -57,7 +57,7 @@ function makechart(vis_num) {
                 .paddingOuter(0.25);
 
             let yscale;
-            if(vis_num === ("main" || "visual1" || "visual6")){
+            if(vis_num === "main" || vis_num === "visual1" || vis_num === "visual6"){
                 yscale = d3
                     .scaleLinear([d3.min(prices), d3.max(prices)], [innerHeight, 0])
                     .nice();
@@ -73,13 +73,48 @@ function makechart(vis_num) {
             let axes = [xaxis, yaxis];
             makeAxes(chart, axes);
 
-            if(vis_num === ("main" || "visual1" || "visual2")){
+            // Add axis labels
+            chart.append("text")
+                .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+                .attr("transform", "translate("+ (margins.left/2) +","+(outerHeight/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+                .text("Price ($)");
+
+            chart.append("text")
+                .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+                .attr("transform", "translate("+ (totalWidth/2) +","+(totalHeight + 70)+")")  // centre below axis
+                .text("Genre");
+
+            // price Vals is for our two final charts, heated scatter chart and heated segment chart
+            let priceVals = d3.entries(groupValuesByPrice(data));
+
+
+            if(vis_num === "main" || vis_num === "visual1" || vis_num === "visual2"){
                 makeBars(chart, data, xscale, yscale);
+            }else if(vis_num === "visual3"){
+                makeScatter(chart, data, xscale, yscale);
+            }else if(vis_num === "visual4"){
+                makeColorBars(chart, data, xscale, yscale);
+            }else if(vis_num === "visual5"){
+                makeColorScatter(chart, data, xscale, yscale);
+            }else if(vis_num === "visual6"){
+                makeLines(chart, data, xscale, yscale);
+            }else if(vis_num === "visual7"){
+                makeSegments(chart, data, xscale, yscale);
+            }else if(vis_num === "visual8"){
+                makeHeatedScatter(chart, priceVals, xscale, yscale);
+            }else if(vis_num === "visual9"){
+                makeHeatedSegments(chart, priceVals, xscale, yscale);
             }
             //makeBars(chart, data, xscale, yscale);
             //makeColorBars(chart, data, xscale, yscale);
-            makeColorScatter(chart, data, xscale, yscale);
+            //makeColorScatter(chart, data, xscale, yscale);
             //makeScatter(chart, data, xscale, yscale);
+            //makeLines(chart, data, xscale, yscale);
+            //makeSegments(chart, data, xscale, yscale);
+
+            //priceVals = d3.entries(groupValuesByPrice(data));
+            //makeHeatedScatter(chart, priceVals, xscale, yscale);
+            //makeHeatedSegments(chart, priceVals, xscale, yscale);
         });
 }
 
@@ -346,7 +381,7 @@ function makeAxes(chart, axes) {
             .selectAll("text")
             .attr("transform", "translate(-10,5)rotate(-45)")
             .style("text-anchor", "end")
-            .style("font-size", 14)
+            .style("font-size", 13)
     );
 }
 
