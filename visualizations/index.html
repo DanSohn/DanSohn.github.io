@@ -2,7 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8">
+    <meta name="author" content="Jung Hyun Sohn, Celina Ma, KyoungHwan Namkoong">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <title>D3 Visualization of Google Play Store</title>
     <link rel="stylesheet" href="index.css"/>
     <link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans:700|Martel:200&display=swap" rel="stylesheet">
@@ -34,6 +38,9 @@
             <h2>
                 Our main visualization
             </h2>
+            <p class="visual_description">
+                Created a simple bar chart with all of the genres from the min to max price points.
+            </p>
             <svg
                     class="chart"
                     id="main"
@@ -48,8 +55,12 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 1
             </h2>
+            <p class="visual_description">
+                We group up the genres even further, placing them into the App genres. Hence, all of the different
+                games (Action, Adventure, Brain, etc) are now placed into Games.
+            </p>
             <svg
                     class="chart"
                     id="visual1"
@@ -64,8 +75,12 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 2
             </h2>
+            <p class="visual_description">
+                Due to several apps having extremely high price points, we utilize a log scale in order to better
+                fit our graph. It is clear to see the free apps with no bars.
+            </p>
             <svg
                     class="chart"
                     id="visual2"
@@ -80,8 +95,14 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 3
             </h2>
+            <p class="visual_description">
+                Still utilizing our log scale, we now convert to a scatter plot to see all the different points, instead
+                of just being able to see the max and min. One can see all the dots with slightly differing prices,
+                however for the free apps, we see that they are overlapping hence cannot tell if there is 1 or 1000 apps
+                that are free.
+            </p>
             <svg
                     class="chart"
                     id="visual3"
@@ -96,8 +117,11 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 4
             </h2>
+            <p class="visual_description">
+                A colored bar chart with log scaling. Different colors represent different price ranges.
+            </p>
             <svg
                     class="chart"
                     id="visual4"
@@ -112,8 +136,11 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 5
             </h2>
+            <p class="visual_description">
+                A colored scatter graph with log scaling. Different colors represent different price ranges.
+            </p>
             <svg
                     class="chart"
                     id="visual5"
@@ -128,8 +155,11 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 6
             </h2>
+            <p class="visual_description">
+                A line graph with linear scaling, representing the same information as our main concept.
+            </p>
             <svg
                     class="chart"
                     id="visual6"
@@ -144,8 +174,11 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 7
             </h2>
+            <p class="visual_description">
+                Utilizing line segments per price point, instead of points.
+            </p>
             <svg
                     class="chart"
                     id="visual7"
@@ -160,8 +193,13 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 8
             </h2>
+            <p class="visual_description">
+                Heated Scatter plot graph where colors represent the number of applications in that range.
+                White represents a single app, while the the more blue and larger the circle is,
+                the more applications there are.
+            </p>
             <svg
                     class="chart"
                     id="visual8"
@@ -176,8 +214,12 @@
 
         <div class="visualization-container">
             <h2>
-                1. lorem ipsum
+                Variation 9
             </h2>
+            <p class="visual_description">
+                Heated bar segment graph, utilizing the color red this time in order to better standout from the
+                blue background. The intensity of the color red represents the number of applications.
+            </p>
             <svg
                     class="chart"
                     id="visual9"

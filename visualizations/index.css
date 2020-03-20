@@ -11,12 +11,10 @@ body {
 .page-container {
     position: relative;
     min-height: 100vh;
-    /*background-color: #f4f4f4;*/
-    background-color: green;
+    background-color: #f4f4f4;
 }
 
 .inner {
-    background: grey;
     max-width: 1600px;
     padding-top: 150px;
     padding-bottom: 70px;
