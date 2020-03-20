@@ -193,7 +193,13 @@
     </div>
 </div>
 <script>
-    makechart();
+    makechart("main");
+    for(let i = 1; i < 10; i++){
+        let str = "visual" + i.toString();
+        makechart(str);
+    }
+
+
 </script>
 </body>
 </html>

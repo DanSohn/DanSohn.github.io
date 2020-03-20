@@ -5,9 +5,10 @@ const totalHeight = 800;
 const innerWidth = totalWidth - margins.left - margins.right;
 const innerHeight = totalHeight - margins.top - margins.bottom;
 
-function makechart() {
-    // Make inner area for chart
-    let chart = d3.select("#main");
+function makechart(vis_num) {
+    // Make inner area for chart, depending on parameter, it will choose which ID to select
+    let chart_area = "#" + vis_num;
+    let chart = d3.select(chart_area);
     makeInnerArea(chart);
 
     // Load the dataset
@@ -183,7 +184,7 @@ function makeAxes(chart, axes) {
             .selectAll("text")
             .attr("transform", "translate(-10,5)rotate(-45)")
             .style("text-anchor", "end")
-            .style("font-size", 10)
+            .style("font-size", 14)
     );
 }
 
