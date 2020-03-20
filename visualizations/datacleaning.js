@@ -1,11 +1,10 @@
-game_genre = new Set(["Action", "Adventure", "Action & Adventure", "Arcade", "Board", "Card", "Casino", "Casual",
-"Educational", "Music", "Pretend Play","Puzzle", "Racing", "Role Playing", "Simulation","Strategy","Trivia","Word"]);
+
 
 // convert rows that have genres such as action;adventure into two rows; 1 with action, 1 with adventure
 // data is an ARRAY of objects
 function clean_genre(data) {
     // console.log(typeof data[0]);
-    console.log("cleaning... ", data);
+    // console.log("cleaning... ", data);
     // iterate through every row in the data
     for (let i = 0, len = data.length; i < len; i++) {
         // if the genre field has more than one genre
@@ -26,7 +25,7 @@ function clean_genre(data) {
             i--;
         }
     }
-    console.log(data);
+    // console.log(data);
     let genres_set = new Set();
 
     for(let i = 0, len = data.length; i < len; i++) {
@@ -39,15 +38,19 @@ function clean_genre(data) {
     }
 
 
-    console.log("number of genres ", genres_set)
+    // console.log("number of genres ", genres_set)
     return data;
 }
 
-education_genre = new Set(["Education", "Brain Games"]);
-productivity_genre = new Set(["Productivity", "Creativity"]);
+
 
 function group_genres(data){
-    console.log("grouping genres furthermore");
+
+    let game_genre = new Set(["Action", "Adventure", "Action & Adventure", "Arcade", "Board", "Card", "Casino", "Casual",
+        "Educational", "Music", "Pretend Play","Puzzle", "Racing", "Role Playing", "Simulation","Strategy","Trivia","Word"]);
+    let education_genre = new Set(["Education", "Brain Games"]);
+    let productivity_genre = new Set(["Productivity", "Creativity"]);
+    // console.log("grouping genres furthermore");
 
     let genres_set = new Set();
 
@@ -71,7 +74,7 @@ function group_genres(data){
 
     }
 
-    console.log("number of genres ", genres_set)
+    // console.log("number of genres ", genres_set)
 
     return data;
 }

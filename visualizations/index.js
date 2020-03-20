@@ -38,10 +38,12 @@ function makechart(vis_num) {
             //uncomment both if you want "app store" genres
             data = clean_genre(data);
             // this is also a variation, grouping up all the genres
-            data = group_genres(data);
+            if(vis_num !== "main"){
+                data = group_genres(data);
+            }
 
             // Run when data is loaded
-            console.log(data);
+            // console.log(data);
 
             // Make y axis (with categories)
             let genre = data.map(d => d.genres);
