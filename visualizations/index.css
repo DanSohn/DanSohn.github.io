@@ -41,6 +41,9 @@ body {
     line-height: 1.6;
 }
 
+.visualization-container {
+    margin-bottom: 60px;
+}
 rect.bg {
     width: 100%;
     height: 100%;
