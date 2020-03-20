@@ -131,7 +131,13 @@ function makeHeatedSegments(chart, data, xscale, yscale) {
         .append("rect")
         .attr("class", "segs")
         .merge(segs)
-        .attr("x", d => margins.left + xscale(d.value[0]))
+        .attr("x", d => {
+            // Check for NaN
+            if (isNaN(xscale(d.value[0]))) {
+                d.value[0] = "Other";
+            }
+            return margins.left + xscale(d.value[0]);
+        })
         .attr("width", xscale.bandwidth())
         .attr("y", (d, i) => logCondition(yscale(d.value[1])))
 
@@ -160,7 +166,14 @@ function makeHeatedScatter(chart, data, xscale, yscale) {
         .append("circle")
         .attr("class", "dots")
         .merge(dots)
-        .attr("cx", (d, i) => margins.left + xscale.bandwidth()/2 + xscale(d.value[0]))   // Map genre
+        .attr("cx", (d, i) => {
+            // Check for NaN
+            if (isNaN(xscale(d.value[0]))) {
+                d.value[0] = "Other";
+            }
+            // Map genre
+            return margins.left + xscale.bandwidth()/2 + xscale(d.value[0]);
+        })
         .attr("cy", (d, i) => logCondition(yscale(d.value[1])))   // Map price
         .attr("r", (d) => radScale(d.value[2]))     // Map # of apps for each price to radius and color
         .attr("fill", (d) => myColor(d.value[2]))
