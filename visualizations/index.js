@@ -216,7 +216,7 @@ function groupValuesByPrice(data) {
             priceArray.push(subarray);
         }
     }
-    console.log(priceArray);
+    //console.log(priceArray);
     return priceArray;
 }
 
