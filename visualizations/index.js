@@ -56,27 +56,137 @@ function makechart(vis_num) {
                 .paddingInner(0.1)
                 .paddingOuter(0.25);
 
-            // let yscale = d3
-            //     .scaleLinear([d3.min(prices), d3.max(prices)], [innerHeight, 0])
-            //     .nice();
-
-            let yscale = d3
-                .scaleLog([0.5, max], [innerHeight, 0])
-                .base(2)
-                .nice();
+            let yscale;
+            if(vis_num === ("main" || "visual1" || "visual6")){
+                yscale = d3
+                    .scaleLinear([d3.min(prices), d3.max(prices)], [innerHeight, 0])
+                    .nice();
+            }else{
+                yscale = d3
+                    .scaleLog([0.5, max], [innerHeight, 0])
+                    .base(2)
+                    .nice();
+            }
 
             let xaxis = d3.axisBottom(xscale).ticks(5);
             let yaxis = d3.axisLeft(yscale).ticks(10);
             let axes = [xaxis, yaxis];
             makeAxes(chart, axes);
 
-            //comment/uncomment these lines to see different graphs
+            if(vis_num === ("main" || "visual1" || "visual2")){
+                makeBars(chart, data, xscale, yscale);
+            }
             //makeBars(chart, data, xscale, yscale);
             //makeColorBars(chart, data, xscale, yscale);
             makeColorScatter(chart, data, xscale, yscale);
             //makeScatter(chart, data, xscale, yscale);
         });
 }
+
+function makeHeatedSegments(chart, data, xscale, yscale) {
+    var colorScale = d3.scaleLinear().domain([1,15])
+        .range(["white", "red"]);
+
+    // Scale rectangle width based on # of apps
+    var sizeScale = d3.scaleLog().domain([1, 1700])
+        .range([2, xscale.bandwidth()]);
+
+    let segs = chart.selectAll(".segs").data(data);
+    segs.enter()
+        .append("rect")
+        .attr("class", "segs")
+        .merge(segs)
+        .attr("x", d => margins.left + xscale(d.value[0]))
+        .attr("width", xscale.bandwidth())
+        .attr("y", (d, i) => logCondition(yscale(d.value[1])))
+
+        // Alt x and width to have width scaling to prices
+        //.attr("x", d => margins.left + xscale(d.value[0]) + (xscale.bandwidth() - sizeScale(d.value[2]))/2)
+        //.attr("width", d => sizeScale(d.value[2]))
+        .attr("height", 5)
+        .attr("fill", (d) => colorScale(d.value[2]));
+    segs.exit().remove();
+}
+
+function makeHeatedScatter(chart, data, xscale, yscale) {
+    // Make bars with colour scaling based on the # of apps
+    // in a certain price range
+    var myColor = d3.scaleLinear().domain([1,15])
+        .range(["white", "blue"]);
+
+    // Scale circle radius based on # of apps
+    var radScale = d3.scaleLog().domain([1, 1700])
+        .range([2,20]);
+
+    // Go through price array
+    let dots = chart.selectAll(".dots").data(data);
+    console.log(data[0].value[0]);
+    dots.enter()
+        .append("circle")
+        .attr("class", "dots")
+        .merge(dots)
+        .attr("cx", (d, i) => margins.left + xscale.bandwidth()/2 + xscale(d.value[0]))   // Map genre
+        .attr("cy", (d, i) => logCondition(yscale(d.value[1])))   // Map price
+        .attr("r", (d) => radScale(d.value[2]))     // Map # of apps for each price to radius and color
+        .attr("fill", (d) => myColor(d.value[2]))
+        .attr("opacity", 0.75);
+    dots.exit().remove();
+}
+
+function groupValuesByPrice(data) {
+    // Dictionary where each genre is a key
+    // Value of each key is another dictionary of each unique price
+    // linked to the # of apps with that price
+    var genrePrices = {};
+
+    // Loop over data
+    for (i in data) {
+        let genre = data[i].genres;
+
+        // Handle undefined prices
+        if (typeof data[i].price !== 'undefined') {
+            var price = data[i].price;
+        } else {
+            var price = "0";
+        }
+
+        // If an app in this genre has already been added
+        if (genre in genrePrices) {
+            // If an app with the same price has already been added
+            if (price in genrePrices[genre]) {
+                genrePrices[genre][price]++;
+            } else {
+                // Add new entry for this price
+                genrePrices[genre][price] = 1;
+            }
+        } else {
+            // Make new entry for genre
+            genrePrices[genre] = {};
+            genrePrices[genre][price] = 1;   // Initialize the # of apps with this price
+        }
+    }
+    //console.log(genrePrices);
+
+    // Use the dictionary to make a 3-length array
+    // like [genre][price][number of apps]
+    priceArray = [];
+    for (genre in genrePrices) {
+        for (price in genrePrices[genre]) {
+            //if price
+
+            subarray = [];
+            subarray[0] = genre;
+            subarray[1] = +price;   // price
+            subarray[2] = genrePrices[genre][price];  // # of apps
+            priceArray.push(subarray);
+        }
+    }
+    console.log(priceArray);
+    return priceArray;
+}
+
+
+
 function colorPicker(v) {
     if (v <= 10) {
         return "#5499C7";
@@ -103,6 +213,21 @@ function logCondition(v) {
     }
 }
 
+function makeSegments(chart, data, xscale, yscale) {
+    let segs = chart.selectAll(".segs").data(data);
+    segs.enter()
+        .append("rect")
+        .attr("class", "segs")
+        .merge(segs)
+        .attr("x", d => margins.left + xscale(d.genres))
+        .attr("y", (d, i) => logCondition(yscale(d.price)) - 5)
+        .attr("width", xscale.bandwidth())
+        .attr("height", 5)
+        .attr("fill", "darkred");
+
+    segs.exit().remove();
+}
+
 function makeScatter(chart, amount, xscale, yscale) {
     let dots = chart.selectAll(".dots").data(amount);
     dots.enter()
@@ -111,7 +236,7 @@ function makeScatter(chart, amount, xscale, yscale) {
         .merge(dots)
         .attr("cx", d => margins.left + xscale(d.genres))
         .attr("cy", (d, i) => logCondition(yscale(d.price)))
-        .attr("r", 2.5)
+        .attr("r", 5)
         .attr("fill", "darkred");
 
     dots.exit().remove();
@@ -149,7 +274,7 @@ function makeColorBars(chart, amount, xscale, yscale) {
 
 function makeBars(chart, amount, xscale, yscale) {
     let bars = chart.selectAll(".bars").data(amount);
-    console.log(amount);
+    //console.log(amount);
     bars.enter()
         .append("rect")
         .attr("class", "bars")
@@ -163,7 +288,42 @@ function makeBars(chart, amount, xscale, yscale) {
     bars.exit().remove();
 }
 
-function makeLines(chart, amount, xscale, yscale) {}
+function makeLines(chart, data, xscale, yscale) {
+    // Add vertical lines
+    let lines = chart.selectAll(".lines").data(data);
+    lines.enter()
+        .append("line")
+        .attr("class", "lines")
+        .merge(lines)
+        .attr("x1", d => xscale(d.genres) + (xscale.bandwidth()/2))
+        .attr("x2", d => xscale(d.genres) + (xscale.bandwidth()/2))
+        .attr("y1", (d, i) => innerHeight)
+        .attr("y2", (d, i) => yscale(d.price))
+        .attr("style", "stroke:rgb(255,0,0);stroke-width:2")
+        .attr("transform", `translate(${margins.left},${margins.top})`);
+
+    // Add tick marks
+    //makeTicks(chart, y1, y2, x);
+}
+
+function makeTicks(chart, y1, y2, midpoint) {
+    let tickLength = 20;
+    chart.append("line")
+        .attr("x1", midpoint - (tickLength/2))    // Left side tick
+        .attr("x2", midpoint + (tickLength/2))
+        .attr("y1", y1)    // Extend ticks by tickLength/2
+        .attr("y2", y1)
+        .attr("style", "stroke:rgb(255,0,0);stroke-width:2")
+        .attr("transform", `translate(${margins.left},${margins.top})`);
+
+    chart.append("line")
+        .attr("x1", midpoint - (tickLength/2))    // Right side tick
+        .attr("x2", midpoint + (tickLength/2))
+        .attr("y1", y2)    // Extend ticks by tickLength/2
+        .attr("y2", y2)
+        .attr("style", "stroke:rgb(255,0,0);stroke-width:2")
+        .attr("transform", `translate(${margins.left},${margins.top})`);
+}
 
 function makeAxes(chart, axes) {
     let selection = chart.selectAll(".axis").data(axes);
@@ -176,7 +336,7 @@ function makeAxes(chart, axes) {
                 "transform",
                 (d, i) =>
                     `translate(${margins.left}, ${margins.top +
-                        (i % 2 === 0 ? innerHeight : 0)})`
+                    (i % 2 === 0 ? innerHeight : 0)})`
             )
             .merge(selection)
             //this is much more complicated than necessary.
@@ -198,5 +358,5 @@ function makeInnerArea(chart) {
         .attr("y", margins.top)
         .attr("width", innerWidth)
         .attr("height", innerHeight)
-        .attr("fill", "white");
+        .attr("fill", "black");
 }
