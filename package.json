@@ -1,35 +1,10 @@
 {
-    "title": "One Page Wonder",
-    "name": "startbootstrap-one-page-wonder",
+    "title": "Daniel's Website!",
     "version": "5.0.7",
-    "scripts": {
-        "start": "node_modules/.bin/gulp watch"
-    },
-    "description": "A one page HTML template built with Bootstrap",
-    "keywords": [
-        "css",
-        "sass",
-        "html",
-        "responsive",
-        "theme",
-        "template"
-    ],
-    "homepage": "https://startbootstrap.com/template-overviews/one-page-wonder",
-    "bugs": {
-        "url": "https://github.com/BlackrockDigital/startbootstrap-one-page-wonder/issues",
-        "email": "feedback@startbootstrap.com"
-    },
+    "description": "Daniel's portfolio website",
     "license": "MIT",
-    "author": "Start Bootstrap",
-    "contributors": [
-        "David Miller (http://davidmiller.io/)"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/BlackrockDigital/startbootstrap-one-page-wonder.git"
-    },
+    "author": "Daniel Sohn",
     "dependencies": {
-        "bootstrap": "4.3.1",
         "jquery": "3.4.1"
     },
     "devDependencies": {
