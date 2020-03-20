@@ -30,7 +30,7 @@
                 Creating 9 visualizations of the Google Play App Store, our sketch, shown from the report put link to report here!!!
                 was to visualize how the <b>different genres and price points </b>interact. Playing with scales, colors, graph types and more,
                 we were able to experiment on how difference in graphs make more differences in understanding. Each graph will be
-                labelled with the changes done to them from the initial graph with links to all of them.
+                labelled with the changes done to them from the initial graph.
             </p>
         </div>
 
@@ -39,7 +39,7 @@
                 Our main visualization
             </h2>
             <p class="visual_description">
-                Created a simple bar chart with all of the genres from the min to max price points.
+                Created a simple bar chart showing the minimum and maximum price points of apps in each genre.
             </p>
             <svg
                     class="chart"
@@ -58,8 +58,8 @@
                 Variation 1
             </h2>
             <p class="visual_description">
-                We group up the genres even further, placing them into the App genres. Hence, all of the different
-                games (Action, Adventure, Brain, etc) are now placed into Games.
+                We group up the genres even further, placing them into broader genres defined by the App store. Hence, all of the specific
+                game genres (Action, Adventure, Brain, etc) are now placed into Games.
             </p>
             <svg
                     class="chart"
@@ -78,8 +78,9 @@
                 Variation 2
             </h2>
             <p class="visual_description">
-                Due to several apps having extremely high price points, we utilize a log scale in order to better
-                fit our graph. It is clear to see the free apps with no bars.
+                Due to several apps having extremely high price points, we utilize a log scale in order to better fit our graph.
+                In the linear scale, it was difficult to see the price range of genres with inexpensive apps.
+                Here, it is clear to see that certain genres have no paid apps, since they have no bars.
             </p>
             <svg
                     class="chart"
@@ -98,10 +99,10 @@
                 Variation 3
             </h2>
             <p class="visual_description">
-                Still utilizing our log scale, we now convert to a scatter plot to see all the different points, instead
-                of just being able to see the max and min. One can see all the dots with slightly differing prices,
-                however for the free apps, we see that they are overlapping hence cannot tell if there is 1 or 1000 apps
-                that are free.
+                Still utilizing our log scale, we now convert to a scatter plot to see a point for every app, instead
+                of just being able to see the maximum and minimum. One can see the range of apps with slightly differing prices.
+                However, for the free apps, we see that they are overlapping. Thus, we cannot tell if there are 1 or 1000 apps
+                that are free in a particular genre.
             </p>
             <svg
                     class="chart"
@@ -140,6 +141,7 @@
             </h2>
             <p class="visual_description">
                 A colored scatter graph with log scaling. Different colors represent different price ranges.
+                The color scale changes for every $50 increase in app price beyond an initial range of $0-10.
             </p>
             <svg
                     class="chart"
@@ -177,7 +179,7 @@
                 Variation 7
             </h2>
             <p class="visual_description">
-                Utilizing line segments per price point, instead of points.
+                Utilizing line segments per price point, instead of points like our scatter plot.
             </p>
             <svg
                     class="chart"
@@ -196,9 +198,10 @@
                 Variation 8
             </h2>
             <p class="visual_description">
-                Heated Scatter plot graph where colors represent the number of applications in that range.
-                White represents a single app, while the the more blue and larger the circle is,
-                the more applications there are.
+                Heated Scatter plot where colors and point radius represent the number of applications that have
+                a certain price.
+                White represents a single app that has a specific price. The more blue and large a circle is,
+                the more applications have the corresponding price.
             </p>
             <svg
                     class="chart"
@@ -218,7 +221,8 @@
             </h2>
             <p class="visual_description">
                 Heated bar segment graph, utilizing the color red this time in order to better standout from the
-                blue background. The intensity of the color red represents the number of applications.
+                blue background. The intensity of the color red represents the number of applications that have
+                a particular price.
             </p>
             <svg
                     class="chart"
