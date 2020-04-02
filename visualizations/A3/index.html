@@ -60,6 +60,14 @@
 
     const path = d3.geoPath().projection(projection);
 
+    // https://mappingwithd3.com/tutorials/basics/tooltip/
+    d3.select("body")
+        .append("div")
+        .attr("id", "tooltip")
+        .style("position", "absolute")
+        .style("opacity", 0)
+        .style("z-index", "99");
+
     Promise.all([
         d3.csv('who.csv'),
         d3.json('world_countries.json'),
@@ -76,15 +84,14 @@
         let fieldYAxis = "Urban_population_pct_of_total";
 
         who.forEach(d => {
-            if (d[fieldColor] == '') {
+            if (d[fieldColor] === '') {
                 d[fieldColor] = undefined;
             }
-            ;
         });
 
         population.forEach(d => {
-            var res = who.find(e => {
-                return e.Country == d.name;
+            let res = who.find(e => {
+                return e.Country === d.name;
             });
             if (typeof res !== 'undefined') {
                 res.id = d.id;
@@ -112,9 +119,49 @@
             .style('opacity', 0.7)
             .style('stroke-width', 0.3)
             .on('mouseover', function (d) {
+                console.log(d);
+                d3.select(this)
+                    .transition()
+                    .style("fill", "#FFF8BF")
+                    .style("stroke", "white")
+                    .style("stroke-width", 1);
+
+                let countryName = "dot COUNTRY-" + d.properties.name;
+                let countryDot = document.getElementsByClassName(countryName);
+                d3.select(countryDot[0])
+                    .transition()
+                    .attr("r", 10)
+                    .style("fill", "#000");
+
+                d3.select("#tooltip")
+                    .style("opacity", 1)
+                    .text(d.properties.name);
             })
             .on('mouseout', function (d) {
+                d3.select(this)
+                    .transition()
+                    .style("fill", d => color(fertilityById[d.id]))
+                    .style("stroke", "black")
+                    .style("stroke-width", 0.3);
+
+                let countryName = "dot COUNTRY-" + d.properties.name;
+                let countryDot = document.getElementsByClassName(countryName);
+                d3.select(countryDot[0])
+                    .transition()
+                    .attr("r", 3.5)
+                    .style("fill", function (d) {
+                        return color(d[fieldColor]);
+                    });
+
+                d3.select("#tooltip")
+                    .style("opacity", 0)
+            })
+            .on("mousemove", function (d) {
+                d3.select("#tooltip")
+                    .style("left", (d3.event.pageX + 15) + "px")
+                    .style("top", (d3.event.pageY - 5) + "px")
             });
+
 
         svg.append('path')
             .datum(topojson.mesh(countries.features, (a, b) => a.id !== b.id))
@@ -171,6 +218,7 @@
             .text(fieldYAxis.replace(/_/g, " "));
 
         // draw dots
+        // using https://mappingwithd3.com/tutorials/basics/tooltip/ for tooltip!
         scatterplot.selectAll(".dot")
             .data(who)
             .enter().append("circle")
@@ -185,25 +233,44 @@
             })
             .on("mouseover", function (d) {
                 console.log(d);
+                d3.select(this)
+                    .transition()
+                    .attr("r", 10);
+
                 let countryCode = "COUNTRY-CODE-" + d.id;
                 let countrySVG = document.getElementsByClassName(countryCode);
-                console.log(countrySVG);
                 d3.select(countrySVG[0])
                     //.transition()
                     .style('fill', "#000000")
                     .style("stroke", 'white')
                     .style('opacity', 1)
                     .style('stroke-width', 0.8);
+
+                d3.select('#tooltip')
+                    //.transition().duration(200)
+                    .style('opacity', 1)
+                    .text(d.Country);
             })
             .on("mouseout", function (d) {
                 let countryCode = "COUNTRY-CODE-" + d.id;
                 let countrySVG = document.getElementsByClassName(countryCode);
+                d3.select(this)
+                    .transition()
+                    .attr("r", 3.5);
                 d3.select(countrySVG[0])
                     .transition()
                     .style('fill', d => color(fertilityById[d.id]))
                     .style('stroke', 'black')
                     .style('opacity', 0.7)
-                    .style('stroke-width', 0.3)
+                    .style('stroke-width', 0.3);
+
+                d3.select('#tooltip')
+                    .style('opacity', 0)
+            })
+            .on("mousemove", function (d) {
+                d3.select("#tooltip")
+                    .style("left", (d3.event.pageX + 15) + "px")
+                    .style("top", (d3.event.pageY - 5) + "px")
             });
 
 
