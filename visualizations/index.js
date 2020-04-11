@@ -50,10 +50,6 @@ function makechart(vis_type) {
             data = group_genres(clean_genre(data));
 
             subsetData = specificGenre(data, "Games");
-            let subsetDataPaid = specificGenre(data, "Games");
-            //console.log(data[0]);
-            // Run when data is loaded
-            //console.log(data);
 
             // Make y axis (with categories)
             let app = data.map((d) => d.app);
@@ -63,41 +59,18 @@ function makechart(vis_type) {
             let genre = data.map((d) => d.genres);
             let rating = data.map((d) => d.rating);
             let prices = data.map((d) => d.price);
-            //let max = Math.max.apply(Math, reviews);
-            //let game = d3.entries(groupDataByGenre(data));
-            let appName = d3.select("#appName");
-            let xscale;
-            let yscale;
-            //if (small_graph) {
-            //    xscale = d3.scaleBand(genre, [0, innerWidth]).paddingInner(0.1).paddingOuter(0.25);
 
-            //    yscale = d3.scaleLog([0.5, max], [innerHeight, 0]).base(2).nice();
-            //} else {
-            xscale = d3.scaleBand(genre, [0, bigInnerWidth]).paddingInner(0.1).paddingOuter(0.25);
-
-            yscale = d3.scaleLinear([0, 5], [bigInnerHeight, 0]).nice();
-            //}
+            let xscale = d3
+                .scaleBand(genre, [0, bigInnerWidth])
+                .paddingInner(0.1)
+                .paddingOuter(0.25);
+            let yscale = d3.scaleLinear([0, 5], [bigInnerHeight, 0]).nice();
 
             let xaxis = d3.axisBottom(xscale).ticks(5);
             let yaxis = d3.axisLeft(yscale).ticks(10);
+
             let axes = [xaxis, yaxis];
-            // if (small_graph) {
-            //     makeAxes(chart, axes, true);
 
-            //     // Add axis labels
-            //     chart
-            //         .append('text')
-            //         .attr('text-anchor', 'middle') // this makes it easy to centre the text as the transform is applied to the anchor
-            //         .style('stroke', 'white')
-            //         .attr('transform', 'translate(' + margins.left / 2 + ',' + bigChartHeight / 2 + ')rotate(-90)') // text is drawn off the screen top left, move down and out and rotate
-            //         .text('Reviews');
-
-            //     chart
-            //         .append('text')
-            //         .attr('text-anchor', 'middle') // this makes it easy to centre the text as the transform is applied to the anchor
-            //         .attr('transform', 'translate(' + smallChartWidth / 2 + ',' + (smallChartHeight + 70) + ')') // centre below axis
-            //         .text('Genre');
-            // } else
             if (vis_type === "scatterplot") {
                 makeAxes(chart, axes, false);
 
@@ -124,40 +97,25 @@ function makechart(vis_type) {
             }
 
             // price Vals is for our two final charts, heated scatter chart and heated segment chart
-            let freepriceVals = d3.entries(groupValuesByPrice(data, "Free"));
-            let paidpriceVals = d3.entries(groupValuesByPrice(data, "Paid"));
             let priceVals = d3.entries(groupValues(data, "Free", "rating"));
-            //console.log(priceVals[i].value[2]);
-            // if (priceVals[i].value[2].reviews < totalmin) {
-            //     totalmin = priceVals[i].value[2].reviews;
-            // } else if (priceVals[i].value[2].reviews > totalmax) {
-            //     totalmax = priceVals[i].value[2].reviews;
-            // }
+
             let maxGroup = 0;
             for (i in priceVals) {
                 if (priceVals[i].value[2].length > maxGroup) {
                     maxGroup = priceVals[i].value[2].length;
                 }
             }
-            console.log(maxGroup);
-            console.log(priceVals[1].value[2].length);
+
             let myColor = d3
                 .scaleLog()
                 .domain([1, 2, 4, 8, 16, 32, 64, 128, 256])
                 .range(d3.schemeBlues[9]);
 
-            // if (vis_type === 'scatterplotFree') {
-            //     makeHeatedScatter(chart, freepriceVals, xscale, yscale);
-            // } else if (vis_type === 'scatterplotPaid') {
-            //     makeHeatedScatter(chart, paidpriceVals, xscale, yscale);
-            // } else
             if (vis_type === "scatterplot") {
                 makeHeatedScatter(chart, priceVals, xscale, yscale, myColor);
             } else if (vis_type === "legend") {
                 makeLegend(chart, myColor);
             }
-            //} //else if (vis_type === "bubblepaid") {
-            //bubbleChart(chart, subsetDataPaid, xscale, yscale);
         });
 }
 
@@ -168,17 +126,21 @@ function makeLegend(chart, myColor) {
     let scatterLegend = chart.selectAll(".legend").data(scatterDomain);
     let bubbleTypeLegend = chart.selectAll(".legend").data(bubbleTypeDomain);
     let bubbleSizeLegend = chart.selectAll(".legend").data(bubbleSizeDomain);
+
+    //uses a purple color scheme for the free apps
     let bubbleFreeColor = d3
         .scaleLog()
         .domain([1, 100, 10000, 1000000, 100000000])
         .range(d3.schemePurples[5]);
+
+    //uses a green color scheme for the paid apps
     let bubblePaidColor = d3
         .scaleLog()
         .domain([1, 100, 10000, 1000000, 100000000])
         .range(d3.schemeGreens[5]);
-    // .attr('transform', function (d, i) {
-    //     return 'translate(-100,' + (i + 1) * 20 + ')';
-    // });
+
+    //Create a legend for the scatterplot
+    //appending rectangles for each of the app groupings
     scatterLegend
         .enter()
         .append("rect")
@@ -190,6 +152,7 @@ function makeLegend(chart, myColor) {
         .attr("height", 25)
         .style("fill", (d, i) => myColor(d));
 
+    //Add the text beside the rectangles to indicate the size of the group
     scatterLegend
         .enter()
         .append("text")
@@ -205,6 +168,7 @@ function makeLegend(chart, myColor) {
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle");
 
+    //Add the header for this legend
     scatterLegend
         .enter()
         .append("text")
@@ -216,6 +180,7 @@ function makeLegend(chart, myColor) {
         .attr("text-anchor", "right")
         .style("alignment-baseline", "middle");
 
+    //Adding circles for the 2 different types of apps; Free & Paid
     bubbleTypeLegend
         .enter()
         .append("circle")
@@ -233,6 +198,8 @@ function makeLegend(chart, myColor) {
                 return bubbleFreeColor(1000000);
             }
         });
+
+    //Adding texts to describe the two types
     bubbleTypeLegend
         .enter()
         .append("text")
@@ -250,6 +217,7 @@ function makeLegend(chart, myColor) {
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle");
 
+    //Adding the header for this legend
     bubbleTypeLegend
         .enter()
         .append("text")
@@ -261,6 +229,7 @@ function makeLegend(chart, myColor) {
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle");
 
+    //Creating circles for the varying radiuses used in the bubble chart
     bubbleSizeLegend
         .enter()
         .append("circle")
@@ -298,6 +267,8 @@ function makeLegend(chart, myColor) {
                 return bubbleFreeColor(d);
             }
         });
+
+    //Add text beside the circle depending on the number of reviews
     bubbleSizeLegend
         .enter()
         .append("text")
@@ -322,6 +293,8 @@ function makeLegend(chart, myColor) {
         .attr("font-size", 16)
         .attr("text-anchor", "right")
         .style("alignment-baseline", "middle");
+
+    //Adding header to this legend
     bubbleSizeLegend
         .enter()
         .append("text")
@@ -332,18 +305,10 @@ function makeLegend(chart, myColor) {
         .attr("font-size", 25)
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle");
-    /*    console.log('min:' + min);
-    console.log('max:' + max);*/
 }
 
 // creates the heated scatter map
 function makeHeatedScatter(chart, data, xscale, yscale, myColor) {
-    // Make bars with colour scaling based on the # of apps
-    // in a certain price range
-
-    // Scale circle radius based on # of apps
-    let radScale = d3.scaleLog().domain([1, 1700]).range([2, 20]);
-
     // Go through price array
     let dots = chart.selectAll(".dots").data(data);
 
@@ -360,7 +325,6 @@ function makeHeatedScatter(chart, data, xscale, yscale, myColor) {
             return margins.left + xscale.bandwidth() / 2 + xscale(d.value[0]);
         })
         .attr("cy", (d, i) => logCondition(yscale(d.value[1]))) // Map rating
-        //.attr('r', (d) => radScale(d.value[2].length)) // Map # of apps for each price to radius and color
         .attr("r", 10)
         .attr("fill", (d) => myColor(d.value[2].length))
         .attr("opacity", 0.75)
@@ -375,7 +339,6 @@ function makeHeatedScatter(chart, data, xscale, yscale, myColor) {
 // Called when dots on the scatterplot are clicked. the onClick function
 function clickScatter(d, myColor) {
     console.log("clicked scatter point", d);
-    //let myColor = d3.scaleLinear().domain([1, 15]).range(['white', 'blue']); // Color scale for scatterplot
     let subsetdata = d.value[2]; // Get list of apps for this point
 
     // Clear bubble chart
@@ -412,26 +375,21 @@ function clickScatter(d, myColor) {
 
 // creates a bubblechart provided the data
 function bubbleChart(chart, data) {
+    //Set the domain and range for the free bubbles
     let bubbleFreeColor = d3
         .scaleLog()
         .domain([1, 100, 10000, 1000000, 100000000])
         .range(d3.schemePurples[5]);
+    //Set the domain and range for the paid bubbles
     let bubblePaidColor = d3
         .scaleLog()
         .domain([1, 100, 10000, 1000000, 100000000])
         .range(d3.schemeGreens[5]);
-    let min = 0;
-    let max = 0;
-    for (i in data) {
-        if (i.reviews < min) {
-            min = data[i].reviews;
-        } else if (data[i].reviews > max) {
-            max = data[i].reviews;
-        }
-    }
-    console.log(min);
-    console.log(max);
+
+    //set the radius scale for the circles within the bubble chart
     let radiusScale = d3.scaleLog().domain([1, 100000000]).range([5, 20]);
+
+    //set the forceX when the free and paid apps are supposed to be separated
     let forceXSeparate = d3
         .forceX(function (d) {
             if (d.type !== "Paid") {
@@ -442,17 +400,22 @@ function bubbleChart(chart, data) {
         })
         .strength(0.05);
 
+    //set the forceX when the apps are supposed to be combined
     let forceXCombine = d3.forceX(bigChartWidth / 2).strength(0.05);
 
+    //set the forceY to be the center of the viewBox
     let forceY = d3
         .forceY(function (d) {
             return bigChartHeight / 2;
         })
         .strength(0.2);
 
+    //set the space between the circles to be based on the reviews
     let forceCollide = d3.forceCollide(function (d) {
         return radiusScale(d.reviews) + 1;
     });
+
+    //create the simulation
     let simulation = d3
         .forceSimulation()
         .nodes(data)
@@ -460,19 +423,19 @@ function bubbleChart(chart, data) {
         .force("y", forceY)
         .force("collide", forceCollide);
 
+    //on click of the split button, set the forceX to be the forceXSeparate
     d3.select("#decade").on("click", function () {
         simulation.force("x", forceXSeparate).alphaTarget(0.25).restart();
     });
 
+    //on click of the combine button, set the forceX to be the forceXCombine
     d3.select("#combine").on("click", function () {
-        console.log("combination");
         simulation.force("x", forceXCombine).alphaTarget(0.1).restart();
     });
 
-    //var circles = chart.selectAll(".artist").data(data);
-    //console.log("bubble data", data);
-
     let circles = chart.append("g");
+
+    //set the radius of each of the cricles
     let node = circles
         .selectAll("circle")
         .data(data)
@@ -481,12 +444,12 @@ function bubbleChart(chart, data) {
         .attr("class", "bubbles")
         .attr("r", (d) => {
             if (d.reviews === 0) {
-                console.log("zero: " + d);
                 return 1;
             } else {
                 return radiusScale(d.reviews);
             }
         })
+        //fill the circles based on their free or paid type
         .attr("fill", (d) => {
             if (d.reviews === 0) {
                 return "grey";
@@ -497,15 +460,16 @@ function bubbleChart(chart, data) {
                 return bubbleFreeColor(d.reviews);
             }
         })
+        //on hovering over a circle, set the circle fill to be an orange colour
         .on("mouseover", function (d) {
             d3.select(this).transition().style("fill", "#FFB951");
-            console.log(d);
         })
+        //on clicking on the circle, it will set the radius of the circle to 30
         .on("click", function (d) {
-            console.log("on click, received", d);
-            d3.select(this).transition().attr("r", 50).style("fill", "#cc8899");
+            d3.select(this).transition().attr("r", 30);
             handleAppWindow(d);
         })
+        //if you move your mouse away from the bubble, it will set the radius and fill back to what it was previously
         .on("mouseout", function (d) {
             d3.select(this)
                 .transition()
@@ -518,7 +482,6 @@ function bubbleChart(chart, data) {
                 })
                 .attr("r", function (d) {
                     if (d.reviews === 0) {
-                        console.log("zero: " + d);
                         return 1;
                     } else {
                         return radiusScale(d.reviews);
@@ -586,11 +549,6 @@ function groupValues(data, priceType, metricName = "rating") {
             metric = data[i].reviews;
         }
 
-        // NaN handling?
-        /*if (isNaN(metric)) {
-            metric = 0;
-        } */
-
         let genre = data[i].genres;
 
         // If an app in this genre has already been added
@@ -600,54 +558,34 @@ function groupValues(data, priceType, metricName = "rating") {
             if (metric in genrePrices[genre]) {
                 //genrePrices[genre][metric]["numApps"]++;
                 genrePrices[genre][metric]["apps"].push(data[i]); // Add the app info
-
-                // Check if this value is a new min or max for this rating range
-                /*min = genrePrices[genre][metric]["minReviews"];
-                max = genrePrices[genre][metric]["maxReviews"];
-
-                if (metric < min) {
-                    genrePrices[genre][metric]["minReviews"] = metric;
-                } else if (metric > max) {
-                    genrePrices[genre][metric]["maxReviews"] = metric;
-                } */
             } else {
                 // Add new entry for this value
                 genrePrices[genre][metric] = {};
                 genrePrices[genre][metric]["apps"] = [];
                 genrePrices[genre][metric]["apps"].push(data[i]);
-                //genrePrices[genre][metric]["maxReviews"] = data[i].reviews;  // Maximum review value for this metric
-                //genrePrices[genre][metric]["minReviews"] = data[i].reviews;
             }
         } else {
             // Make new entry for genre
             genrePrices[genre] = {};
             genrePrices[genre][metric] = {};
             genrePrices[genre][metric]["apps"] = [];
-            //genrePrices[genre][metric]["maxReviews"] = data[i].reviews;  // Maximum review value for this metric
-            //genrePrices[genre][metric]["minReviews"] = data[i].reviews;
             genrePrices[genre][metric]["apps"].push(data[i]); // Add the app info
         }
     }
-    console.log("values", genrePrices);
 
     // Use the dictionary to make a 3-length array
     // like [genre][rating][number of apps][minimum reviews][maximum reviews]
     let scatterArray = [];
 
     for (var genre in genrePrices) {
-        //metricArray[genre]["apps"] = genrePrices[genre]["apps"];   // Add list of apps to each genre
         for (var metric in genrePrices[genre]) {
             var subarray = [];
             subarray[0] = genre;
             subarray[1] = +metric; // price
             subarray[2] = genrePrices[genre][metric]["apps"];
-            //subarray[3] = genrePrices[genre][metric]["minReviews"];
-            //subarray[3] = genrePrices[genre][metric]["maxReviews"];
             scatterArray.push(subarray);
         }
     }
-    //metricArray = d3.entries(genrePrices);
-    console.log("scatterdata", scatterArray);
     return scatterArray;
 }
 
@@ -693,8 +631,6 @@ function groupValuesByPrice(data, priceType) {
             genrePrices[genre][price] = 1; // Initialize the # of apps with this price
         }
     }
-    //console.log(genrePrices);
-
     // Use the dictionary to make a 3-length array
     // like [genre][price][number of apps]
     let priceArray = [];
@@ -709,7 +645,6 @@ function groupValuesByPrice(data, priceType) {
             priceArray.push(subarray);
         }
     }
-    //console.log(priceArray);
     return priceArray;
 }
 
