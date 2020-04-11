@@ -195,7 +195,7 @@ function makeLegend(chart, myColor) {
         .append("text")
         .attr("x", 10 + 25 * 1.5)
         .attr("y", function (d, i) {
-            return 365 + i * -40 + 25 / 2;
+            return 360 + i * -40 + 25 / 2;
         })
         .style("fill", "white")
         .text(function (d) {

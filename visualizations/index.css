@@ -1,25 +1,27 @@
 html {
     scroll-behavior: smooth;
 }
-
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 body {
     font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     line-height: 20px;
     position: absolute;
-    width: 100%;
-    height: 100%;
     margin: 0;
     color: white;
     background-color: #101010;
     display: flex;
+    width: 100%;
     justify-content: center;
     -webkit-font-smoothing: antialiased;
 }
 
 .page-container {
     width: 100%;
-    height: 1080px;
     position: relative;
     display: flex;
     align-content: center;
@@ -33,13 +35,14 @@ body {
     align-content: center;
     /* same height as top, since nav bar is 80px currently */
 }
-.inner header h1 {
-    font-size: 50px;
+.inner header h3 {
+    margin-top: 5px;
+    font-size: 30px;
     text-align: center;
     padding-bottom: 10px;
 }
 
-.individual_chart h2 {
+.individual_chart h5 {
     margin: 0;
 }
 .description {
@@ -54,6 +57,7 @@ body {
 }
 
 .visualization-container {
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,7 +70,7 @@ body {
 }
 
 .button_container button {
-/*    width: 12%; */
+    /*    width: 12%; */
     margin-top: 10px;
     padding: 10px;
 }
@@ -80,6 +84,8 @@ body {
 }
 
 .visual_description {
+    height: 10px;
+    margin: 0px;
     text-align: center;
     align-content: center;
     flex-grow: 1;
@@ -104,7 +110,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
 }
 
 svg {
