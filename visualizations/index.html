@@ -1,272 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Jung Hyun Sohn, Celina Ma, KyoungHwan Namkoong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="utf-8">
-    <meta name="author" content="Jung Hyun Sohn, Celina Ma, KyoungHwan Namkoong">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>D3 Visualization of Google Play Store</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="index.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
 
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-fetch.v1.js"></script>
 
-    <title>D3 Visualization of Google Play Store</title>
-    <link rel="stylesheet" href="index.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans:700|Martel:200&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="datacleaning.js"></script>
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <div class="page-container">
+            <div class="inner">
+                <header>
+                    <h1>Google Play Store Analysis</h1>
+                </header>
 
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://d3js.org/d3-fetch.v1.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="datacleaning.js"></script>
-    <script src="index.js"></script>
-</head>
-<body>
-<div class="page-container">
-    <div class="inner">
-        <header>
-            <h1>CPSC583 Hand-In 3 Visualizations</h1>
-        </header>
-
-        <div class="description">
-            <p>
-                Creating 9 visualizations of the Google Play App Store, our sketch, shown from the report put link to report here!!!
-                was to visualize how the <b>different genres and price points </b>interact. Playing with scales, colors, graph types and more,
-                we were able to experiment on how difference in graphs make more differences in understanding. Each graph will be
-                labelled with the changes done to them from the initial graph.
-            </p>
+                <div class="visualization-container">
+                    <div class="visual_description">
+                        <p>
+                            We take in 10 000 applications on the app store and look deeper into
+                            genres, ratings, reviews and the insights that the apps can give
+                            developers and users.
+                        </p>
+                    </div>
+                    <div class="visual_chart">
+                        <div class="individual_chart">
+                            <h2>Apps by Genre & Rating</h2>
+                            <svg
+                                class="chart"
+                                id="scatterplot"
+                                viewBox="0 0 1315 400"
+                                width="1315"
+                                height="400"
+                            >
+                                <rect class="bg" />
+                            </svg>
+                        </div>
+                        <div class="individual_chart">
+                            <h2>Legend</h2>
+                            <svg
+                                class="chart"
+                                id="legend"
+                                viewBox="0 0 500 400"
+                                width="500"
+                                height="400"
+                            >
+                                <rect class="bg" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="visualization-container">
+                    <div class="visual_description"></div>
+                    <div class="visual_chart">
+                        <div class="individual_chart">
+                            <h2>Free & Paid Apps</h2>
+                            <svg
+                                class="chart"
+                                id="bubblefree"
+                                viewBox="0 0 1315 400"
+                                width="1315"
+                                height="400"
+                            >
+                                <rect class="bg" />
+                            </svg>
+                            <div class="button_container">
+                                <button id="decade" class="btn btn-dark">Split</button>
+                                <button id="combine" class="btn btn-light">Combine</button>
+                            </div>
+                        </div>
+                        <div class="individual_chart">
+                            <h2>App Information</h2>
+                            <div id="appWindow">
+                                <h3 id="appName">App Name</h3>
+                                <h3 id="appGenre">Genre</h3>
+                                <h3 id="appRating">Rating</h3>
+                                <h3 id="appPrice">Price</h3>
+                                <h3 id="appReviews"># of Reviews</h3>
+                                <h3 id="appInstalls"># of Installs</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="visualization-container">
-            <h2>
-                Our main visualization
-            </h2>
-            <p class="visual_description">
-                Created a simple bar chart showing the minimum and maximum price points of apps in each genre.
-            </p>
-            <svg
-                    class="chart"
-                    id="main"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 1
-            </h2>
-            <p class="visual_description">
-                We group up the genres even further, placing them into broader genres defined by the App store. Hence, all of the specific
-                game genres (Action, Adventure, Brain, etc) are now placed into Games.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual1"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 2
-            </h2>
-            <p class="visual_description">
-                Due to several apps having extremely high price points, we utilize a log scale in order to better fit our graph.
-                In the linear scale, it was difficult to see the price range of genres with inexpensive apps.
-                Here, it is clear to see that certain genres have no paid apps, since they have no bars.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual2"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 3
-            </h2>
-            <p class="visual_description">
-                Still utilizing our log scale, we now convert to a scatter plot to see a point for every app, instead
-                of just being able to see the maximum and minimum. One can see the range of apps with slightly differing prices.
-                However, for the free apps, we see that they are overlapping. Thus, we cannot tell if there are 1 or 1000 apps
-                that are free in a particular genre.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual3"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 4
-            </h2>
-            <p class="visual_description">
-                A colored bar chart with log scaling. Different colors represent different price ranges.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual4"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 5
-            </h2>
-            <p class="visual_description">
-                A colored scatter graph with log scaling. Different colors represent different price ranges.
-                The color scale changes for every $50 increase in app price beyond an initial range of $0-10.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual5"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 6
-            </h2>
-            <p class="visual_description">
-                A line graph with linear scaling, representing the same information as our main concept.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual6"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 7
-            </h2>
-            <p class="visual_description">
-                Utilizing line segments per price point, instead of points like our scatter plot.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual7"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 8
-            </h2>
-            <p class="visual_description">
-                Heated Scatter plot where colors and point radius represent the number of applications that have
-                a certain price.
-                White represents a single app that has a specific price. The more blue and large a circle is,
-                the more applications have the corresponding price.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual8"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-        <div class="visualization-container">
-            <h2>
-                Variation 9
-            </h2>
-            <p class="visual_description">
-                Heated bar segment graph, utilizing the color red this time in order to better standout from the
-                blue background. The intensity of the color red represents the number of applications that have
-                a particular price.
-            </p>
-            <svg
-                    class="chart"
-                    id="visual9"
-                    viewbox="0 0 1600 900"
-                    width="1600"
-                    height="800"
-            >
-
-                <rect class="bg"></rect>
-            </svg>
-        </div>
-
-    </div>
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-</div>
-<script>
-    makechart("main");
-    for(let i = 1; i < 10; i++){
-        let str = "visual" + i.toString();
-        makechart(str);
-    }
-
-    //Get the button
-    let my_button = document.getElementById("myBtn");
-
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            my_button.style.display = "block";
-        } else {
-            my_button.style.display = "none";
-        }
-    }
-
-    // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-
-</script>
-</body>
+        <script>
+            makechart("scatterplotFree");
+            makechart("scatterplotPaid");
+            makechart("scatterplot");
+            makechart("bubblefree");
+            makechart("bubblepaid");
+            makechart("legend");
+        </script>
+    </body>
 </html>
-

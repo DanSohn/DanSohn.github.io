@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Jung Hyun Sohn, Celina Ma, KyoungHwan Namkoong" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>D3 Visualization of Google Play Store</title>
+        <link rel="stylesheet" href="index.css" />
+        <link href="https://fonts.googleapis.com/css?family=Karla:700|Open+Sans:700|Martel:200&display=swap" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-fetch.v1.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="datacleaning.js"></script>
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Our main visualization
+                </h2>
+                <p>
+                    Created a simple bar chart showing the minimum and maximum price points of apps in each genre.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="mainfree" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="mainpaid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 1
+                </h2>
+                <p>
+                    We group up the genres even further, placing them into broader genres defined by the App store. Hence, all of the specific game genres (Action, Adventure, Brain, etc) are
+                    now placed into Games.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual1free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual1paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 2
+                </h2>
+                <p>
+                    Due to several apps having extremely high price points, we utilize a log scale in order to better fit our graph. In the linear scale, it was difficult to see the price
+                    range of genres with inexpensive apps. Here, it is clear to see that certain genres have no paid apps, since they have no bars.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual2free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual2paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 3
+                </h2>
+                <p>
+                    Still utilizing our log scale, we now convert to a scatter plot to see a point for every app, instead of just being able to see the maximum and minimum. One can see the
+                    range of apps with slightly differing prices. However, for the free apps, we see that they are overlapping. Thus, we cannot tell if there are 1 or 1000 apps that are free
+                    in a particular genre.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual3free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual3paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 4
+                </h2>
+                <p>
+                    A colored bar chart with log scaling. Different colors represent different price ranges.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual4free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual4paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 5
+                </h2>
+                <p>
+                    A colored scatter graph with log scaling. Different colors represent different price ranges. The color scale changes for every $50 increase in app price beyond an initial
+                    range of $0-10.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual5free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual5paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 6
+                </h2>
+                <p>
+                    A line graph with linear scaling, representing the same information as our main concept.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual6free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual6paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 7
+                </h2>
+                <p>
+                    Utilizing line segments per price point, instead of points like our scatter plot.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual7free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual7paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization-container">
+            <div class="visual_description">
+                <h2>
+                    Variation 9
+                </h2>
+                <p>
+                    Heated bar segment graph, utilizing the color red this time in order to better standout from the blue background. The intensity of the color red represents the number of
+                    applications that have a particular price.
+                </p>
+            </div>
+            <div class="visual_chart">
+                <div class="individual_chart">
+                    <h2>Free</h2>
+                    <svg class="chart" id="visual9free" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+                <div class="individual_chart">
+                    <h2>Paid</h2>
+                    <svg class="chart" id="visual9paid" viewbox="0 0 900 500" width="900" height="500">
+                        <rect class="bg"></rect>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
