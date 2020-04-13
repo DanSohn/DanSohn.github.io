@@ -146,7 +146,7 @@ function makeLegend(chart, myColor) {
         .append("rect")
         .attr("x", 10)
         .attr("y", function (d, i) {
-            return 360 + i * -40;
+            return 38 + i * 40;
         })
         .attr("width", 25)
         .attr("height", 25)
@@ -158,7 +158,7 @@ function makeLegend(chart, myColor) {
         .append("text")
         .attr("x", 10 + 25 * 1.5)
         .attr("y", function (d, i) {
-            return 360 + i * -40 + 25 / 2;
+            return 40 + i * 40 + 25 / 2;
         })
         .style("fill", "white")
         .text(function (d) {
@@ -375,6 +375,9 @@ function clickScatter(d, myColor) {
 
 // creates a bubblechart provided the data
 function bubbleChart(chart, data) {
+    // Remove any existing tooltip
+    d3.selectAll(".tool").remove();
+
     //Set the domain and range for the free bubbles
     let bubbleFreeColor = d3
         .scaleLog()
@@ -435,6 +438,16 @@ function bubbleChart(chart, data) {
 
     let circles = chart.append("g");
 
+    // Add tooltip for app info
+    var tooltip = d3.select("body")
+        .append("div")
+        .classed("tool", true)
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("fill", "white")
+        .style("background", "MEDIUMSLATEBLUE")
+        .style("visibility", "hidden");
+
     //set the radius of each of the cricles
     let node = circles
         .selectAll("circle")
@@ -463,7 +476,14 @@ function bubbleChart(chart, data) {
         //on hovering over a circle, set the circle fill to be an orange colour
         .on("mouseover", function (d) {
             d3.select(this).transition().style("fill", "#FFB951");
+
+            // Define div for the bubble chart tooltip
+            tooltip
+                .style("visibility", "visible")
+                .text(d.app);
+
         })
+        .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
         //on clicking on the circle, it will set the radius of the circle to 30
         .on("click", function (d) {
             d3.select(this).transition().attr("r", 30);
@@ -471,6 +491,9 @@ function bubbleChart(chart, data) {
         })
         //if you move your mouse away from the bubble, it will set the radius and fill back to what it was previously
         .on("mouseout", function (d) {
+            // Hide app tooltip
+            tooltip.style("visibility", "hidden");
+
             d3.select(this)
                 .transition()
                 .style("fill", function () {
@@ -501,6 +524,7 @@ function bubbleChart(chart, data) {
                 return d.y;
             });
     });
+
 }
 
 // function that handles the app information window, whether its changing it to d, or reverting it back to normal
