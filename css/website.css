@@ -75,9 +75,17 @@ a img {
 
 
 #illustration {
-    background-color: black;
-    width: 100%;
-    text-align: right;
+    /* The image used */
+    background-image: url("../img/lake_louise.jpg");
+
+    /* Set a specific height */
+    height: 800px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .inner {
